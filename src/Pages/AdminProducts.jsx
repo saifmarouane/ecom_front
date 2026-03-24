@@ -1,0 +1,218 @@
+import React, { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { createProduct, deleteProduct, getCategories, getProducts, updateProduct } from "../services/api";
+import { useI18n } from "../Components/I18nProvider";
+
+const emptyForm = {
+  name: "",
+  description: "",
+  price: "",
+  originalPrice: "",
+  stock: "",
+  isActive: true,
+  categoryId: "",
+  imageLarge: null,
+  imageSmall: null,
+};
+
+export default function AdminProducts() {
+  const { t } = useI18n();
+  const [items, setItems] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [form, setForm] = useState(emptyForm);
+  const [editingId, setEditingId] = useState(null);
+  const [saving, setSaving] = useState(false);
+
+  const catById = useMemo(() => {
+    const map = new Map();
+    categories.forEach((c) => map.set(String(c.id), c));
+    return map;
+  }, [categories]);
+
+  const load = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const [prods, cats] = await Promise.all([getProducts(), getCategories()]);
+      setItems(Array.isArray(prods) ? prods : []);
+      setCategories(Array.isArray(cats) ? cats : []);
+    } catch (e) {
+      setError(e.message || "Error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  const startEdit = (p) => {
+    setEditingId(p.id);
+    setForm({
+      name: p.name || "",
+      description: p.description || "",
+      price: p.price ?? "",
+      originalPrice: p.originalPrice ?? "",
+      stock: p.stock ?? "",
+      isActive: Boolean(p.isActive),
+      categoryId: p.categoryId ? String(p.categoryId) : "",
+      imageLarge: null,
+      imageSmall: null,
+    });
+  };
+
+  const reset = () => {
+    setEditingId(null);
+    setForm(emptyForm);
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    setError("");
+    const payload = {
+      name: form.name,
+      description: form.description || null,
+      price: form.price,
+      originalPrice: form.originalPrice || null,
+      stock: form.stock || 0,
+      isActive: form.isActive ? "true" : "false",
+      categoryId: form.categoryId || "",
+    };
+    if (form.imageLarge) payload.imageLarge = form.imageLarge;
+    if (form.imageSmall) payload.imageSmall = form.imageSmall;
+
+    try {
+      if (editingId) await updateProduct(editingId, payload);
+      else await createProduct(payload);
+      reset();
+      await load();
+    } catch (err) {
+      setError(err.message || "Error");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const remove = async (id) => {
+    if (!window.confirm(t("confirmDelete"))) return;
+    setError("");
+    try {
+      await deleteProduct(id);
+      await load();
+    } catch (err) {
+      setError(err.message || "Error");
+    }
+  };
+
+  return (
+    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+      <div className="admin-header">
+        <h1>{t("adminProducts")}</h1>
+        <p className="admin-dashboard-intro">{t("adminCrudHint")}</p>
+      </div>
+
+      <div className="admin-grid">
+        <div className="admin-panel">
+          <h2>{editingId ? t("edit") : t("create")}</h2>
+          <form className="admin-form" onSubmit={onSubmit}>
+            <label>
+              {t("name")}
+              <input value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} required />
+            </label>
+            <label>
+              {t("description")}
+              <textarea rows="3" value={form.description} onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))} />
+            </label>
+            <div className="admin-form-2">
+              <label>
+                {t("price")}
+                <input type="number" step="0.01" value={form.price} onChange={(e) => setForm((p) => ({ ...p, price: e.target.value }))} required />
+              </label>
+              <label>
+                {t("originalPrice")}
+                <input type="number" step="0.01" value={form.originalPrice} onChange={(e) => setForm((p) => ({ ...p, originalPrice: e.target.value }))} />
+              </label>
+            </div>
+            <div className="admin-form-2">
+              <label>
+                {t("stock")}
+                <input type="number" value={form.stock} onChange={(e) => setForm((p) => ({ ...p, stock: e.target.value }))} />
+              </label>
+              <label>
+                {t("category")}
+                <select value={form.categoryId} onChange={(e) => setForm((p) => ({ ...p, categoryId: e.target.value }))}>
+                  <option value="">{t("none")}</option>
+                  {categories.map((c) => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <label className="admin-check">
+              <input type="checkbox" checked={form.isActive} onChange={(e) => setForm((p) => ({ ...p, isActive: e.target.checked }))} />
+              {t("active")}
+            </label>
+
+            <div className="admin-form-2">
+              <label>
+                {t("imageLarge")}
+                <input type="file" accept="image/*" onChange={(e) => setForm((p) => ({ ...p, imageLarge: e.target.files?.[0] || null }))} />
+              </label>
+              <label>
+                {t("imageSmall")}
+                <input type="file" accept="image/*" onChange={(e) => setForm((p) => ({ ...p, imageSmall: e.target.files?.[0] || null }))} />
+              </label>
+            </div>
+
+            {error && <p className="form-error">{error}</p>}
+            <div className="admin-row">
+              <button type="submit" disabled={saving}>{saving ? "..." : (editingId ? t("save") : t("create"))}</button>
+              {editingId && (
+                <button type="button" className="btn ghost" onClick={reset}>
+                  {t("cancel")}
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
+
+        <div className="admin-panel">
+          <h2>{t("list")}</h2>
+          {loading && <p className="products-status">{t("loading")}</p>}
+          {!loading && (
+            <div className="admin-table cols-6">
+              <div className="admin-thead">
+                <div>ID</div>
+                <div>{t("name")}</div>
+                <div>{t("category")}</div>
+                <div>{t("price")}</div>
+                <div>{t("stock")}</div>
+                <div>{t("actions")}</div>
+              </div>
+              {items.map((p) => (
+                <div className="admin-tr" key={p.id}>
+                  <div>{p.id}</div>
+                  <div className="admin-namecell">
+                    <div>{p.name}</div>
+                    <div className="admin-sub">{p.isActive ? t("active") : t("inactive")}</div>
+                  </div>
+                  <div>{p.category?.name || catById.get(String(p.categoryId))?.name || "-"}</div>
+                  <div>{Number(p.price || 0).toFixed(2)}</div>
+                  <div>{p.stock ?? 0}</div>
+                  <div className="admin-actions">
+                    <button type="button" className="btn ghost" onClick={() => startEdit(p)}>{t("edit")}</button>
+                    <button type="button" className="btn ghost danger" onClick={() => remove(p.id)}>{t("delete")}</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
