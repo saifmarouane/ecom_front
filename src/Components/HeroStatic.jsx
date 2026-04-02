@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import homeHeroImg from "../images/home-hero-img.webp";
+import homeHeroImg from "../images/home-hero-img.png";
 import { useI18n } from "./I18nProvider";
 
 export default function HeroStatic() {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import honeyComb from "../images/honeycomb.webp";
+import honeyComb from "../images/honeycomb.jpg";
 
 import ProductsSection from "../Components/ProductsSection";
 import Header from "../Components/Header";
