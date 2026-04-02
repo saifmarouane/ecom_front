@@ -14,6 +14,7 @@ function toId(value) {
 const Header = ({ showCategories = true }) => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [isBrandOpen, setIsBrandOpen] = useState(false);
   const { user, logout } = useAuth();
   const { t, lang, setLang } = useI18n();
   const cart = useCart();
@@ -21,13 +22,16 @@ const Header = ({ showCategories = true }) => {
 
   const navItems = [
     { label: t("navHome"), to: "/" },
-    { label: t("navAbout"), to: "/about" },
     { label: t("navProducts"), to: "/products" },
-    { label: t("navBlog"), to: "/blog" },
     { label: t("navContact"), to: "/contact" },
   ];
 
   const isActive = (path) => location.pathname === path;
+
+  useEffect(() => {
+    setIsOpen(false);
+    setIsBrandOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!showCategories) return;
@@ -79,7 +83,41 @@ const Header = ({ showCategories = true }) => {
         </button>
 
         <nav className={`nav ${isOpen ? "nav-open" : ""}`}>
-          {navItems.map((item) => (
+          {navItems.slice(0, 1).map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={`nav-link ${isActive(item.to) ? "active" : ""}`}
+              onClick={() => setIsOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+
+          <div className={`nav-dropdown ${isBrandOpen ? "open" : ""}`}>
+            <button
+              type="button"
+              className="nav-link nav-dropdown-btn"
+              aria-haspopup="menu"
+              aria-expanded={isBrandOpen}
+              onClick={() => setIsBrandOpen((prev) => !prev)}
+            >
+              {t("navBrand")} <span className="nav-caret" aria-hidden="true">▾</span>
+            </button>
+            <div className="nav-dropdown-menu" role="menu">
+              <Link className="nav-dropdown-item" role="menuitem" to="/about" onClick={() => { setIsBrandOpen(false); setIsOpen(false); }}>
+                {t("navAbout")}
+              </Link>
+              <Link className="nav-dropdown-item" role="menuitem" to="/blog" onClick={() => { setIsBrandOpen(false); setIsOpen(false); }}>
+                {t("navBlog")}
+              </Link>
+              <Link className="nav-dropdown-item" role="menuitem" to="/about" onClick={() => { setIsBrandOpen(false); setIsOpen(false); }}>
+                {t("ourStory")}
+              </Link>
+            </div>
+          </div>
+
+          {navItems.slice(1).map((item) => (
             <Link
               key={item.to}
               to={item.to}
@@ -90,9 +128,6 @@ const Header = ({ showCategories = true }) => {
             </Link>
           ))}
           <div className="nav-actions">
-            <Link className="btn ghost" to="/about" onClick={() => setIsOpen(false)}>
-              {t("ourStory")}
-            </Link>
             <Link className="btn solid" to="/products" onClick={() => setIsOpen(false)}>
               {t("shopNow")}
             </Link>
@@ -136,7 +171,15 @@ const Header = ({ showCategories = true }) => {
                 {t("loginBtn")}
               </Link>
             )}
-            <select className="lang-switch" value={lang} onChange={(e) => setLang(e.target.value)}>
+            <select
+              className="lang-switch"
+              value={lang}
+              onChange={(e) => {
+                setLang(e.target.value);
+                setIsOpen(false);
+                setIsBrandOpen(false);
+              }}
+            >
               <option value="ar">{t("langAr")}</option>
               <option value="en">{t("langEn")}</option>
               <option value="fr">{t("langFr")}</option>
