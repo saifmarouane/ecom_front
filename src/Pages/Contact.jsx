@@ -20,15 +20,15 @@ const Contact = () => {
           <div className="contact-info">
             <div className="contact-item">
               <h3>{t('contactEmail')}</h3>
-              <p>info@beepure.com</p>
+              <p>marouane@beldimarket.ma</p>
             </div>
             <div className="contact-item">
               <h3>{t('contactPhone')}</h3>
-              <p>+1 (555) 123-4567</p>
+              <p>+212 666599460</p>
             </div>
             <div className="contact-item">
               <h3>{t('contactAddress')}</h3>
-              <p>123 Honey Lane, Beetown, USA</p>
+              <p>Salmia 2, Casablanca, Maroc</p>
             </div>
           </div>
           <div className="contact-form">

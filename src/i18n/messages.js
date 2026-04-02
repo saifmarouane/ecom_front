@@ -59,9 +59,9 @@ export const messages = {
     ctaFootnote: "لا رسائل مزعجة. فقط إصدارات موسمية ووصفات.",
     footerShop: "المتجر",
     footerQuick: "روابط سريعة",
-    footerAbout: "عن BeePure",
+    footerAbout: "عن BeldiMarket",
     footerCopy: "جميع الحقوق محفوظة",
-    aboutTitle: "عن BeePure",
+    aboutTitle: "عن BeldiMarket",
     aboutTxt1:
       "بدأت رحلتنا بشغف للعسل النقي والتزام بتربية النحل المستدامة.",
     aboutTxt2:
@@ -240,9 +240,9 @@ export const messages = {
     ctaFootnote: "No spam. Just seasonal drops and recipes.",
     footerShop: "Shop",
     footerQuick: "Quick links",
-    footerAbout: "About BeePure",
+    footerAbout: "About BeldiMarket",
     footerCopy: "All rights reserved",
-    aboutTitle: "About BeePure",
+    aboutTitle: "About BeldiMarket",
     aboutTxt1:
       "Our journey began with a passion for pure honey and a commitment to sustainable beekeeping.",
     aboutTxt2:
@@ -314,7 +314,7 @@ export const messages = {
     adminProducts: "Manage products",
     adminSettings: "Settings",
     dashboardTitle: "Dashboard",
-    dashboardIntro: "Overview of your BeePure app",
+    dashboardIntro: "Overview of your BeldiMarket app",
     adminStatsCategories: "Categories",
     adminStatsProducts: "Products",
     adminStatsOrders: "Orders",
@@ -429,9 +429,9 @@ export const messages = {
     ctaFootnote: "Pas de spam. Des sorties saisonnières et des recettes.",
     footerShop: "Boutique",
     footerQuick: "Liens rapides",
-    footerAbout: "À propos de BeePure",
+    footerAbout: "À propos de BeldiMarket",
     footerCopy: "Tous droits réservés",
-    aboutTitle: "À propos de BeePure",
+    aboutTitle: "À propos de BeldiMarket",
     aboutTxt1:
       "Notre aventure est née d'une passion pour le miel pur et l'apiculture durable.",
     aboutTxt2:
@@ -503,7 +503,7 @@ export const messages = {
     adminProducts: "Gérer les produits",
     adminSettings: "Paramètres",
     dashboardTitle: "Tableau de bord",
-    dashboardIntro: "Vue d'ensemble de BeePure",
+    dashboardIntro: "Vue d'ensemble de BeldiMarket",
     adminStatsCategories: "Catégories",
     adminStatsProducts: "Produits",
     adminStatsOrders: "Commandes",
