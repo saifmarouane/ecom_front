@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../Components/Header";
-import { getProductById } from "../services/api";
+import { getProductById, toServerUrl } from "../services/api";
 import { useCart } from "../Components/CartProvider";
 import { useI18n } from "../Components/I18nProvider";
 
@@ -37,6 +37,7 @@ export default function ProductDetails() {
   const price = useMemo(() => Number(product?.price || 0), [product]);
   const original = useMemo(() => (product?.originalPrice ? Number(product.originalPrice) : null), [product]);
   const img = product?.imageLarge || product?.imageSmall || null;
+  const imgUrl = useMemo(() => toServerUrl(img), [img]);
 
   return (
     <div>
@@ -56,11 +57,11 @@ export default function ProductDetails() {
 
           {!loading && product && (
             <div className="pd-grid">
-              <div className="pd-media">
-                <div className="pd-media-card">
-                  {img ? <img src={img} alt={product.name} /> : <div className="product-noimage">—</div>}
-                </div>
-              </div>
+	              <div className="pd-media">
+	                <div className="pd-media-card">
+	                  {imgUrl ? <img src={imgUrl} alt={product.name} /> : <div className="product-noimage">—</div>}
+	                </div>
+	              </div>
               <div className="pd-info">
                 <p className="eyebrow">{product.category?.name || t("category")}</p>
                 <h1 className="pd-title">{product.name}</h1>
@@ -109,4 +110,3 @@ export default function ProductDetails() {
     </div>
   );
 }
-

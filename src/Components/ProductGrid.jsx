@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "./CartProvider";
 import { useI18n } from "./I18nProvider";
+import { toServerUrl } from "../services/api";
 
 export default function ProductGrid({ products }) {
   const cart = useCart();
@@ -18,7 +19,7 @@ export default function ProductGrid({ products }) {
               {product.imageLarge || product.imageSmall ? (
                 <img
                   className="product-image"
-                  src={product.imageSmall || product.imageLarge}
+                  src={toServerUrl(product.imageSmall || product.imageLarge)}
                   alt={product.name}
                   loading="lazy"
                 />
@@ -62,4 +63,3 @@ export default function ProductGrid({ products }) {
     </div>
   );
 }
-

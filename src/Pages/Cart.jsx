@@ -5,6 +5,7 @@ import Header from "../Components/Header";
 import { useCart } from "../Components/CartProvider";
 import { useI18n } from "../Components/I18nProvider";
 import { useAuth } from "../Components/AuthProvider";
+import { toServerUrl } from "../services/api";
 
 export default function Cart() {
   const { t } = useI18n();
@@ -46,14 +47,14 @@ export default function Cart() {
           ) : (
             <div className="cart-grid">
               <div className="cart-list">
-                {cart.items.map((it) => {
-                  const p = it.product || {};
-                  const img = p.imageSmall || p.imageLarge;
-                  return (
-                    <div className="cart-row" key={it.id || it.productId}>
-                      <div className="cart-thumb">
-                        {img ? <img src={img} alt={p.name || "product"} /> : <div className="product-noimage">—</div>}
-                      </div>
+	                {cart.items.map((it) => {
+	                  const p = it.product || {};
+	                  const img = p.imageSmall || p.imageLarge;
+	                  return (
+	                    <div className="cart-row" key={it.id || it.productId}>
+	                      <div className="cart-thumb">
+	                        {img ? <img src={toServerUrl(img)} alt={p.name || "product"} /> : <div className="product-noimage">—</div>}
+	                      </div>
                       <div className="cart-info">
                         <div className="cart-title">{p.name || "-"}</div>
                         <div className="cart-sub">{p.category?.name || ""}</div>
@@ -100,4 +101,3 @@ export default function Cart() {
     </div>
   );
 }
-
