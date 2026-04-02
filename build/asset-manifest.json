@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.587b3409.css",
-    "main.js": "/static/js/main.f68d5311.js",
+    "main.css": "/static/css/main.83f80885.css",
+    "main.js": "/static/js/main.c73db6f2.js",
     "static/js/488.3f79be7a.chunk.js": "/static/js/488.3f79be7a.chunk.js",
+    "static/media/home-hero-img.png": "/static/media/home-hero-img.587f6c369381ecbfccd7.png",
+    "static/media/marklogo.png": "/static/media/marklogo.6d80c0a0a36df6896d10.png",
+    "static/media/Honeycomb.jpg": "/static/media/Honeycomb.e06f1c612ac2b52353a7.jpg",
     "index.html": "/index.html",
-    "static/media/home-hero-img.webp": "/static/media/home-hero-img.9fb3fb1879a90854252f.webp",
-    "static/media/honeycomb.webp": "/static/media/honeycomb.9fb3fb1879a90854252f.webp",
-    "main.587b3409.css.map": "/static/css/main.587b3409.css.map",
-    "main.f68d5311.js.map": "/static/js/main.f68d5311.js.map",
+    "main.83f80885.css.map": "/static/css/main.83f80885.css.map",
+    "main.c73db6f2.js.map": "/static/js/main.c73db6f2.js.map",
     "488.3f79be7a.chunk.js.map": "/static/js/488.3f79be7a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.587b3409.css",
-    "static/js/main.f68d5311.js"
+    "static/css/main.83f80885.css",
+    "static/js/main.c73db6f2.js"
   ]
 }
