@@ -1,16 +1,17 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import { useCart } from "../Components/CartProvider";
 import { useI18n } from "../Components/I18nProvider";
 import { useAuth } from "../Components/AuthProvider";
-import { toServerUrl } from "../services/api";
+import { checkoutCart, toServerUrl } from "../services/api";
 
 export default function Cart() {
   const { t } = useI18n();
   const { user } = useAuth();
   const cart = useCart();
+  const [checkingOut, setCheckingOut] = useState(false);
 
   const total = useMemo(() => {
     return cart.items.reduce((sum, it) => {
@@ -18,7 +19,23 @@ export default function Cart() {
       const price = Number(p.price || 0);
       return sum + price * Number(it.quantity || 0);
     }, 0);
-  }, [cart.items]);
+    }, [cart.items]);
+
+  async function onCheckout() {
+    if (checkingOut) return;
+    setCheckingOut(true);
+    try {
+      const result = await checkoutCart();
+      const url = result?.whatsapp?.url;
+      await cart.refresh();
+      if (url) window.open(url, "_blank", "noopener,noreferrer");
+      else alert("Commande passée ✅");
+    } catch (e) {
+      alert(e?.message || "Erreur checkout");
+    } finally {
+      setCheckingOut(false);
+    }
+  }
 
   return (
     <div>
@@ -77,26 +94,28 @@ export default function Cart() {
                 })}
               </div>
 
-              <aside className="cart-summary">
-                <h2>{t("summary")}</h2>
-                <div className="sum-row">
-                  <span>{t("items")}</span>
-                  <span>{cart.count}</span>
-                </div>
-                <div className="sum-row total">
-                  <span>{t("total")}</span>
-                  <span>{total.toFixed(2)} €</span>
-                </div>
-                {!user ? (
-                  <Link className="btn solid" to="/login">{t("loginToCheckout")}</Link>
-                ) : (
-                  <button className="btn solid" type="button">{t("checkout")}</button>
-                )}
-                <p className="footnote">{t("cartNote")}</p>
-              </aside>
-            </div>
-          )}
-        </div>
+	              <aside className="cart-summary">
+	                <h2>{t("summary")}</h2>
+	                <div className="sum-row">
+	                  <span>{t("items")}</span>
+	                  <span>{cart.count}</span>
+	                </div>
+	                <div className="sum-row total">
+	                  <span>{t("total")}</span>
+	                  <span>{total.toFixed(2)} €</span>
+	                </div>
+	                {!user ? (
+	                  <Link className="btn solid" to="/login">{t("loginToCheckout")}</Link>
+	                ) : (
+	                  <button className="btn solid" type="button" onClick={onCheckout} disabled={checkingOut}>
+                      {checkingOut ? "..." : t("checkout")}
+                    </button>
+	                )}
+	                <p className="footnote">{t("cartNote")}</p>
+	              </aside>
+	            </div>
+	          )}
+	        </div>
       </motion.section>
     </div>
   );

@@ -1,5 +1,5 @@
-const API_BASE = process.env.REACT_APP_API_BASE || '/api'
-
+// const API_BASE = process.env.REACT_APP_API_BASE || '/api'
+const API_BASE ='https://ecombackend-staging.up.railway.app/api';
 let memoryToken = ''
 
 export function setAuthToken(token) {
@@ -264,4 +264,13 @@ export async function clearCart() {
     headers: { ...authHeaders() }
   })
   if (!res.ok) throw new Error(await parseError(res))
+}
+
+export async function checkoutCart() {
+  const res = await fetch(`${API_BASE}/cart/checkout`, {
+    method: 'POST',
+    headers: { ...authHeaders() }
+  })
+  if (!res.ok) throw new Error(await parseError(res))
+  return res.json()
 }
