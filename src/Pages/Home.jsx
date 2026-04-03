@@ -23,6 +23,18 @@ const Home = () => {
 
   return (
     <div>
+         {/* 🏷 SEO */}
+      <Helmet>
+        <title>Beldi Market | Boutique en ligne au Maroc</title>
+        <meta
+          name="description"
+          content="Beldi Market, votre boutique en ligne au Maroc. Produits locaux, livraison rapide."
+        />
+        <meta
+          name="keywords"
+          content="beldi market, maroc, e-commerce, produits locaux, miel, artisanat"
+        />
+      </Helmet>
       <Header />
 
       <HeroStatic />

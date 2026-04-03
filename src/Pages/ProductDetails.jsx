@@ -41,6 +41,14 @@ export default function ProductDetails() {
 
   return (
     <div>
+            <Helmet>
+        <title>{product.name} | Beldi Market</title>
+        <meta
+          name="description"
+          content={`Achetez ${product.name} sur Beldi Market, boutique en ligne au Maroc. ${product.description}`}
+        />
+        <meta name="keywords" content={`beldi market, ${product.name}, produits locaux, e-commerce`} />
+      </Helmet>
       <Header />
       <motion.section
         initial={{ opacity: 0, y: 18 }}
