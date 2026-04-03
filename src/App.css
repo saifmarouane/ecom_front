@@ -240,8 +240,10 @@ img {
   padding: 10px 24px;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -1722,7 +1724,7 @@ img {
     position: absolute;
     left: 0;
     right: 0;
-    top: 68px;
+    top: calc(100% + 8px);
     background: #120c08;
     padding: 14px 18px;
     flex-direction: column;
@@ -1732,6 +1734,10 @@ img {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s ease;
+  }
+
+  .topbar.topbar-open .categorybar {
+    display: none;
   }
 
   .nav-dropdown {
@@ -1781,6 +1787,18 @@ img {
 @media (max-width: 640px) {
   .app-shell main {
     padding: 0 18px 56px;
+  }
+
+  .categorybar-inner {
+    padding: 10px 16px;
+    justify-content: flex-start;
+    scroll-padding-inline: 16px;
+  }
+
+  .categorybar-link {
+    font-size: 13px;
+    padding: 9px 12px;
+    line-height: 1.2;
   }
 
   .hero__stats {

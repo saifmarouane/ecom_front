@@ -65,7 +65,7 @@ const Header = ({ showCategories = true }) => {
   const isCategoryRoute = location.pathname.startsWith("/categories/");
 
   return (
-    <header className="topbar">
+    <header className={`topbar ${isOpen ? "topbar-open" : ""}`}>
       <div className="topbar-inner">
         <Link className="brand" to="/">
           <img className="brand-mark" src={marklogo} alt="BeldiMarket" />
@@ -75,6 +75,7 @@ const Header = ({ showCategories = true }) => {
         <button
           className="nav-toggle"
           aria-label="Toggle navigation"
+          aria-expanded={isOpen}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <span className="nav-toggle-line" />
