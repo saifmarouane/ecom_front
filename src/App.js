@@ -19,6 +19,7 @@ import AdminLayout from "./Pages/AdminLayout";
 import AdminCategories from "./Pages/AdminCategories";
 import AdminProducts from "./Pages/AdminProducts";
 import AdminUsers from "./Pages/AdminUsers";
+import AdminOrders from "./Pages/AdminOrders";
 import Cart from "./Pages/Cart";
 import ProductDetails from "./Pages/ProductDetails";
 
@@ -51,6 +52,7 @@ function App() {
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="categories" element={<AdminCategories />} />
             <Route path="products" element={<AdminProducts />} />
+            <Route path="orders" element={<AdminOrders />} />
             <Route path="users" element={<AdminUsers />} />
             <Route path="settings" element={<Navigate to="/admin/dashboard" replace />} />
           </Route>

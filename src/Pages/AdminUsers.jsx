@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { createAdminUser, deleteAdminUser, getAdminUsers, updateAdminUser } from "../services/api";
 import { useI18n } from "../Components/I18nProvider";
+import AdminTable from "../Components/AdminTable";
 
 const emptyForm = { username: "", email: "", password: "", role: "client" };
 
@@ -116,30 +117,19 @@ export default function AdminUsers() {
 
         <div className="admin-panel">
           <h2>{t("list")}</h2>
-          {loading && <p className="products-status">{t("loading")}</p>}
-          {!loading && (
-            <div className="admin-table cols-5">
-              <div className="admin-thead">
-                <div>ID</div>
-                <div>{t("username")}</div>
-                <div>{t("email")}</div>
-                <div>{t("role")}</div>
-                <div>{t("actions")}</div>
-              </div>
-              {items.map((u) => (
-                <div className="admin-tr" key={u.id}>
-                  <div>{u.id}</div>
-                  <div>{u.username}</div>
-                  <div>{u.email || "-"}</div>
-                  <div>{u.role}</div>
-                  <div className="admin-actions">
-                    <button type="button" className="btn ghost" onClick={() => startEdit(u)}>{t("edit")}</button>
-                    <button type="button" className="btn ghost danger" onClick={() => remove(u.id)}>{t("delete")}</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <AdminTable
+            columns={[
+              { key: "id", label: "ID" },
+              { key: "username", label: t("username") },
+              { key: "email", label: t("email"), render: (val) => val || "-" },
+              { key: "role", label: t("role") },
+            ]}
+            data={items}
+            loading={loading}
+            onEdit={startEdit}
+            onDelete={remove}
+            emptyMessage={t("noData") || "No users"}
+          />
         </div>
       </div>
     </motion.div>

@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { createProduct, deleteProduct, getCategories, getProducts, updateProduct } from "../services/api";
 import { useI18n } from "../Components/I18nProvider";
+import ImageCropModal from "../Components/ImageCropModal";
+import AdminTable from "../Components/AdminTable";
 
 const emptyForm = {
   name: "",
@@ -24,12 +26,35 @@ export default function AdminProducts() {
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [crop, setCrop] = useState(null);
+  const [previewLarge, setPreviewLarge] = useState("");
+  const [previewSmall, setPreviewSmall] = useState("");
 
   const catById = useMemo(() => {
     const map = new Map();
     categories.forEach((c) => map.set(String(c.id), c));
     return map;
   }, [categories]);
+
+  useEffect(() => {
+    if (!(form.imageLarge instanceof File)) {
+      setPreviewLarge("");
+      return;
+    }
+    const url = URL.createObjectURL(form.imageLarge);
+    setPreviewLarge(url);
+    return () => URL.revokeObjectURL(url);
+  }, [form.imageLarge]);
+
+  useEffect(() => {
+    if (!(form.imageSmall instanceof File)) {
+      setPreviewSmall("");
+      return;
+    }
+    const url = URL.createObjectURL(form.imageSmall);
+    setPreviewSmall(url);
+    return () => URL.revokeObjectURL(url);
+  }, [form.imageSmall]);
 
   const load = async () => {
     setLoading(true);
@@ -71,6 +96,16 @@ export default function AdminProducts() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (!editingId) {
+      if (!(form.imageSmall instanceof File)) {
+        setError(t("imageSmallRequired"));
+        return;
+      }
+      if (!(form.imageLarge instanceof File)) {
+        setError(t("imageLargeRequired"));
+        return;
+      }
+    }
     setSaving(true);
     setError("");
     const payload = {
@@ -115,10 +150,10 @@ export default function AdminProducts() {
         <p className="admin-dashboard-intro">{t("adminCrudHint")}</p>
       </div>
 
-      <div className="admin-grid">
-        <div className="admin-panel">
-          <h2>{editingId ? t("edit") : t("create")}</h2>
-          <form className="admin-form" onSubmit={onSubmit}>
+	      <div className="admin-grid">
+	        <div className="admin-panel">
+	          <h2>{editingId ? t("edit") : t("create")}</h2>
+	          <form className="admin-form" onSubmit={onSubmit}>
             <label>
               {t("name")}
               <input value={form.name} onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))} required />
@@ -157,18 +192,72 @@ export default function AdminProducts() {
               {t("active")}
             </label>
 
-            <div className="admin-form-2">
-              <label>
-                {t("imageLarge")}
-                <input type="file" accept="image/*" onChange={(e) => setForm((p) => ({ ...p, imageLarge: e.target.files?.[0] || null }))} />
-              </label>
-              <label>
-                {t("imageSmall")}
-                <input type="file" accept="image/*" onChange={(e) => setForm((p) => ({ ...p, imageSmall: e.target.files?.[0] || null }))} />
-              </label>
-            </div>
+	            <div className="admin-form-2">
+	              <label>
+	                {t("imageLarge")}
+                  {previewLarge && (
+                    <img
+                      src={previewLarge}
+                      alt={form.name || "product"}
+                      style={{ width: "100%", maxWidth: 260, height: 160, objectFit: "cover", borderRadius: 12, border: "1px solid rgba(255,255,255,0.12)" }}
+                    />
+                  )}
+	                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0] || null;
+                      e.target.value = "";
+                      if (!f) return;
+                      setCrop({
+                        file: f,
+                        aspect: 4 / 3,
+                        outputWidth: 1600,
+                        outputHeight: 1200,
+                        title: t("cropLargeTitle"),
+                        hint: t("cropHint"),
+                        onApply: (croppedFile) => {
+                          setForm((p) => ({ ...p, imageLarge: croppedFile }));
+                          setCrop(null);
+                        },
+                      });
+                    }}
+                  />
+	              </label>
+	              <label>
+	                {t("imageSmall")}
+                  {previewSmall && (
+                    <img
+                      src={previewSmall}
+                      alt={form.name || "product"}
+                      style={{ width: "100%", maxWidth: 220, height: 140, objectFit: "cover", borderRadius: 12, border: "1px solid rgba(255,255,255,0.12)" }}
+                    />
+                  )}
+	                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0] || null;
+                      e.target.value = "";
+                      if (!f) return;
+                      setCrop({
+                        file: f,
+                        aspect: 4 / 3,
+                        outputWidth: 800,
+                        outputHeight: 600,
+                        title: t("cropSmallTitle"),
+                        hint: t("cropHint"),
+                        onApply: (croppedFile) => {
+                          setForm((p) => ({ ...p, imageSmall: croppedFile }));
+                          setCrop(null);
+                        },
+                      });
+                    }}
+                  />
+	              </label>
+	            </div>
 
-            {error && <p className="form-error">{error}</p>}
+	            {error && <p className="form-error">{error}</p>}
             <div className="admin-row">
               <button type="submit" disabled={saving}>{saving ? "..." : (editingId ? t("save") : t("create"))}</button>
               {editingId && (
@@ -182,37 +271,57 @@ export default function AdminProducts() {
 
         <div className="admin-panel">
           <h2>{t("list")}</h2>
-          {loading && <p className="products-status">{t("loading")}</p>}
-          {!loading && (
-            <div className="admin-table cols-6">
-              <div className="admin-thead">
-                <div>ID</div>
-                <div>{t("name")}</div>
-                <div>{t("category")}</div>
-                <div>{t("price")}</div>
-                <div>{t("stock")}</div>
-                <div>{t("actions")}</div>
-              </div>
-              {items.map((p) => (
-                <div className="admin-tr" key={p.id}>
-                  <div>{p.id}</div>
-                  <div className="admin-namecell">
-                    <div>{p.name}</div>
-                    <div className="admin-sub">{p.isActive ? t("active") : t("inactive")}</div>
+          <AdminTable
+            columns={[
+              { key: "id", label: "ID" },
+              {
+                key: "name",
+                label: t("name"),
+                render: (val, item) => (
+                  <div>
+                    <div>{val}</div>
+                    <div className="admin-sub" style={{ fontSize: "0.75rem", opacity: 0.7 }}>
+                      {item.isActive ? t("active") : t("inactive")}
+                    </div>
                   </div>
-                  <div>{p.category?.name || catById.get(String(p.categoryId))?.name || "-"}</div>
-                  <div>{Number(p.price || 0).toFixed(2)}</div>
-                  <div>{p.stock ?? 0}</div>
-                  <div className="admin-actions">
-                    <button type="button" className="btn ghost" onClick={() => startEdit(p)}>{t("edit")}</button>
-                    <button type="button" className="btn ghost danger" onClick={() => remove(p.id)}>{t("delete")}</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ),
+              },
+              {
+                key: "category",
+                label: t("category"),
+                render: (val, item) => item.category?.name || catById.get(String(item.categoryId))?.name || "-",
+              },
+              { key: "price", label: t("price"), render: (val) => Number(val || 0).toFixed(2) },
+              { key: "originalPrice", label: t("originalPrice"), render: (val) => val ? Number(val).toFixed(2) : "-" },
+              { key: "stock", label: t("stock") },
+            ]}
+            data={items}
+            loading={loading}
+            onEdit={startEdit}
+            onDelete={remove}
+            emptyMessage={t("noData") || "No products"}
+          />
         </div>
-      </div>
-    </motion.div>
-  );
+	      </div>
+
+        <ImageCropModal
+          open={Boolean(crop?.file)}
+          file={crop?.file || null}
+          aspect={crop?.aspect || 1}
+          outputWidth={crop?.outputWidth || 1200}
+          outputHeight={crop?.outputHeight || 1200}
+          title={crop?.title || t("cropImage")}
+          hint={crop?.hint || ""}
+          cancelLabel={t("cropCancel")}
+          applyLabel={t("cropApply")}
+          resetLabel={t("cropReset")}
+          zoomLabel={t("cropZoom")}
+          onCancel={() => setCrop(null)}
+          onApply={(croppedFile) => {
+            if (typeof crop?.onApply === "function") crop.onApply(croppedFile);
+            else setCrop(null);
+          }}
+        />
+	    </motion.div>
+	  );
 }

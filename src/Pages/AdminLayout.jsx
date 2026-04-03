@@ -7,6 +7,7 @@ const AdminLayout = () => {
   const { t } = useI18n();
   const items = [
     { to: "/admin/dashboard", label: t("adminDashboard") },
+    { to: "/admin/orders", label: t("adminOrders") },
     { to: "/admin/categories", label: t("adminCategories") },
     { to: "/admin/products", label: t("adminProducts") },
     { to: "/admin/users", label: t("adminUsers") },

@@ -184,6 +184,47 @@ export async function deleteProduct(id) {
   if (!res.ok) throw new Error(await parseError(res))
 }
 
+// Orders (admin)
+export async function getAdminOrders({ status = '', limit = 80 } = {}) {
+  const qs = new URLSearchParams()
+  if (status) qs.set('status', status)
+  if (limit) qs.set('limit', String(limit))
+
+  const res = await fetch(`${API_BASE}/orders?${qs.toString()}`, {
+    headers: { ...authHeaders() }
+  })
+  if (!res.ok) throw new Error(await parseError(res))
+  return res.json()
+}
+
+export async function updateAdminOrderStatus(orderId, status) {
+  const res = await fetch(`${API_BASE}/orders/${orderId}/status`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify({ status })
+  })
+  if (!res.ok) throw new Error(await parseError(res))
+  return res.json()
+}
+
+export async function updateAdminOrderComment(orderId, comment) {
+  const res = await fetch(`${API_BASE}/orders/${orderId}/comment`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify({ comment })
+  })
+  if (!res.ok) throw new Error(await parseError(res))
+  return res.json()
+}
+
+export async function getAdminOrderStats() {
+  const res = await fetch(`${API_BASE}/orders/stats`, {
+    headers: { ...authHeaders() }
+  })
+  if (!res.ok) throw new Error(await parseError(res))
+  return res.json()
+}
+
 // Users (admin)
 export async function getAdminUsers() {
   const res = await fetch(`${API_BASE}/auth/admin/users`, {
