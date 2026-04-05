@@ -5,7 +5,7 @@ import HeroStatic from "../Components/HeroStatic";
 import ProductGrid from "../Components/ProductGrid";
 import { getCategories, getProducts } from "../services/api";
 import { useI18n } from "../Components/I18nProvider";
-
+import { Helmet } from "react-helmet";
 function toId(value) {
   if (value === null || value === undefined) return "";
   if (typeof value === "object") {

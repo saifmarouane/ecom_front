@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import ProductsSection from "../Components/ProductsSection";
 import { useI18n } from "../Components/I18nProvider";
-
+import { Helmet } from "react-helmet";
 const Products = () => {
   const { t } = useI18n();
   return (

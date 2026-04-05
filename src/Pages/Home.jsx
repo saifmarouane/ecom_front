@@ -6,7 +6,7 @@ import ProductsSection from "../Components/ProductsSection";
 import Header from "../Components/Header";
 import { useI18n } from "../Components/I18nProvider";
 import HeroStatic from "../Components/HeroStatic";
-
+import { Helmet } from "react-helmet";
 const Home = () => {
   const { t } = useI18n();
   const highlights = [

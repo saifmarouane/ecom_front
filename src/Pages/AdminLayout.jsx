@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Header from "../Components/Header";
 import { useI18n } from "../Components/I18nProvider";
-
+import { Helmet } from "react-helmet";
 const AdminLayout = () => {
   const { t } = useI18n();
   const items = [

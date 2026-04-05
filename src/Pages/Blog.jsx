@@ -3,11 +3,18 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import { useI18n } from "../Components/I18nProvider";
-
+import { Helmet } from "react-helmet";
 const Blog = () => {
   const { t } = useI18n();
   return (
     <div>
+      <Helmet>
+        <title>Beldi Market | Blog</title>
+        <meta
+          name="description"
+          content="Découvrez nos derniers articles sur le miel, l'artisanat et la vie en général."
+        />
+      </Helmet>
       <Header />
       <motion.section
         initial={{ opacity: 0, y: 50 }}

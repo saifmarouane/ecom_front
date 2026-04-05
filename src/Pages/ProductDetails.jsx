@@ -5,7 +5,7 @@ import Header from "../Components/Header";
 import { getProductById, toServerUrl } from "../services/api";
 import { useCart } from "../Components/CartProvider";
 import { useI18n } from "../Components/I18nProvider";
-
+import { Helmet } from "react-helmet";
 export default function ProductDetails() {
   const { id } = useParams();
   const { t } = useI18n();
