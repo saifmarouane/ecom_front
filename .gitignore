@@ -15,6 +15,7 @@ pnpm-debug.log*
 # Front-end build outputs
 front_end/build/
 front_end/dist/
+front_end/src/images
 front_end/.pnp/
 front_end/.pnp.js
 
