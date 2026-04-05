@@ -89,10 +89,36 @@ export default function ProductDetails() {
                     <input value={qty} onChange={(e) => setQty(Math.max(1, Number(e.target.value) || 1))} />
                     <button type="button" className="qty-btn" onClick={() => setQty((q) => q + 1)}>+</button>
                   </div>
-                  <button
+                  {/* <button
                     type="button"
                     className="btn solid"
                     onClick={() => cart.add(product, qty)}
+                    disabled={product.stock <= 0}
+                  >
+                    {t("addToCart")}
+                  </button> */}
+                  <button
+                    type="button"
+                    className="btn solid"
+                    onClick={() => {
+                      cart.add(product, qty);
+
+                      // Tracking Google Analytics
+                      if (window.gtag) {
+                        window.gtag('event', 'add_to_cart', {
+                          currency: 'MAD',
+                          value: product.price * qty,
+                          items: [
+                            {
+                              item_id: product._id,
+                              item_name: product.name,
+                              price: product.price,
+                              quantity: qty
+                            }
+                          ]
+                        });
+                      }
+                    }}
                     disabled={product.stock <= 0}
                   >
                     {t("addToCart")}
