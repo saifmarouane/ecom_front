@@ -1,6 +1,8 @@
 import "./App.css";
 
+import { Helmet } from "react-helmet";
 import { Routes, Route } from "react-router-dom";
+import marklogo from "./images/marklogo.png";
 import Footer from "./Components/Footer";
 import ScrollToTop from "./Components/ScrollToTop";
 
@@ -26,6 +28,9 @@ import ProductDetails from "./Pages/ProductDetails";
 function App() {
   return (
     <div className="app-shell">
+      <Helmet>
+        <link rel="icon" href={marklogo} type="image/png" />
+      </Helmet>
       <ScrollToTop />
       <main>
         <Routes>
