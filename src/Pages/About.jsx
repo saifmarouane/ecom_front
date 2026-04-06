@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import Seo from "../Components/Seo";
+import { useI18n } from "../Components/I18nProvider";
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState('fr');
+  const { lang } = useI18n();
 
   const content = {
     fr: {
@@ -40,7 +41,7 @@ const About = () => {
     }
   };
 
-  const currentContent = content[activeTab] || content.fr;
+  const currentContent = content[lang] || content.fr;
 
   return (
     <div>
@@ -51,61 +52,7 @@ const About = () => {
       />
       <Header />
       
-      {/* Language Tabs */}
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}>
-        <div className="about-section" style={{ padding: "20px", textAlign: "center" }}>
-          <div className="language-tabs" style={{ marginBottom: "30px" }}>
-            <button
-              onClick={() => setActiveTab('fr')}
-              className={`tab-btn ${activeTab === 'fr' ? 'active' : ''}`}
-              style={{
-                padding: "10px 20px",
-                margin: "0 5px",
-                border: "2px solid #8B4513",
-                backgroundColor: activeTab === 'fr' ? '#8B4513' : 'white',
-                color: activeTab === 'fr' ? 'white' : '#8B4513',
-                cursor: "pointer",
-                borderRadius: "5px",
-                fontWeight: "bold"
-              }}>
-              Français
-            </button>
-            <button
-              onClick={() => setActiveTab('en')}
-              className={`tab-btn ${activeTab === 'en' ? 'active' : ''}`}
-              style={{
-                padding: "10px 20px",
-                margin: "0 5px",
-                border: "2px solid #8B4513",
-                backgroundColor: activeTab === 'en' ? '#8B4513' : 'white',
-                color: activeTab === 'en' ? 'white' : '#8B4513',
-                cursor: "pointer",
-                borderRadius: "5px",
-                fontWeight: "bold"
-              }}>
-              English
-            </button>
-            <button
-              onClick={() => setActiveTab('ar')}
-              className={`tab-btn ${activeTab === 'ar' ? 'active' : ''}`}
-              style={{
-                padding: "10px 20px",
-                margin: "0 5px",
-                border: "2px solid #8B4513",
-                backgroundColor: activeTab === 'ar' ? '#8B4513' : 'white',
-                color: activeTab === 'ar' ? 'white' : '#8B4513',
-                cursor: "pointer",
-                borderRadius: "5px",
-                fontWeight: "bold"
-              }}>
-              العربية
-            </button>
-          </div>
-        </div>
-      </motion.section>
+
 
       {/* Main Content */}
       <motion.section
@@ -114,11 +61,11 @@ const About = () => {
         transition={{ duration: 1, ease: "easeOut" }}>
         <div className="about-section" style={{ padding: "40px 20px" }}>
           <div className="about-container" style={{ maxWidth: "900px", margin: "0 auto" }}>
-            <h1 style={{ fontSize: "2.5em", marginBottom: "20px", color: "#8B4513" }}>
+            <h1 style={{ fontSize: "2.5em", marginBottom: "20px", color: "#8B4513", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.title}
             </h1>
             
-            <p style={{ fontSize: "1.3em", fontStyle: "italic", marginBottom: "40px", lineHeight: "1.6", whiteSpace: "pre-line", color: "#555" }}>
+            <p style={{ fontSize: "1.3em", fontStyle: "italic", marginBottom: "40px", lineHeight: "1.6", whiteSpace: "pre-line", color: "#333", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.subtitle}
             </p>
 
@@ -147,11 +94,11 @@ const About = () => {
               </div>
             </motion.div>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#333" }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#2c2c2c", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph1}
             </p>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#333", whiteSpace: "pre-line" }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#2c2c2c", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph2}
             </p>
 
@@ -180,11 +127,11 @@ const About = () => {
               </div>
             </motion.div>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#333", whiteSpace: "pre-line" }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#2c2c2c", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph3}
             </p>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#333", whiteSpace: "pre-line" }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#2c2c2c", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph4}
             </p>
 
@@ -213,11 +160,11 @@ const About = () => {
               </div>
             </motion.div>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "30px", color: "#333" }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "30px", color: "#2c2c2c", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph5}
             </p>
 
-            <h2 style={{ fontSize: "1.8em", fontStyle: "italic", color: "#8B4513", marginTop: "30px", paddingTop: "30px", borderTop: "2px solid #E8D5C4" }}>
+            <h2 style={{ fontSize: "1.8em", fontStyle: "italic", color: "#8B4513", marginTop: "30px", paddingTop: "30px", borderTop: "2px solid #E8D5C4", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.closing}
             </h2>
 

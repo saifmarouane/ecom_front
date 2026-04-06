@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import Seo from "../Components/Seo";
+import { useI18n } from "../Components/I18nProvider";
 
 const Blog = () => {
-  const [activeTab, setActiveTab] = useState('fr');
+  const { lang } = useI18n();
 
   const blogPosts = {
     fr: [
@@ -99,7 +100,7 @@ const Blog = () => {
     ]
   };
 
-  const posts = blogPosts[activeTab] || blogPosts.fr;
+  const posts = blogPosts[lang] || blogPosts.fr;
 
   return (
     <div>
@@ -110,62 +111,7 @@ const Blog = () => {
       />
       <Header />
 
-      {/* Language Tabs */}
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}>
-        <div className="blog-section" style={{ padding: "20px", textAlign: "center" }}>
-          <h1 style={{ fontSize: "2.5em", marginBottom: "30px", color: "#8B4513" }}>Notre Blog</h1>
-          <div className="language-tabs" style={{ marginBottom: "30px" }}>
-            <button
-              onClick={() => setActiveTab('fr')}
-              className={`tab-btn ${activeTab === 'fr' ? 'active' : ''}`}
-              style={{
-                padding: "10px 20px",
-                margin: "0 5px",
-                border: "2px solid #8B4513",
-                backgroundColor: activeTab === 'fr' ? '#8B4513' : 'white',
-                color: activeTab === 'fr' ? 'white' : '#8B4513',
-                cursor: "pointer",
-                borderRadius: "5px",
-                fontWeight: "bold"
-              }}>
-              Français
-            </button>
-            <button
-              onClick={() => setActiveTab('en')}
-              className={`tab-btn ${activeTab === 'en' ? 'active' : ''}`}
-              style={{
-                padding: "10px 20px",
-                margin: "0 5px",
-                border: "2px solid #8B4513",
-                backgroundColor: activeTab === 'en' ? '#8B4513' : 'white',
-                color: activeTab === 'en' ? 'white' : '#8B4513',
-                cursor: "pointer",
-                borderRadius: "5px",
-                fontWeight: "bold"
-              }}>
-              English
-            </button>
-            <button
-              onClick={() => setActiveTab('ar')}
-              className={`tab-btn ${activeTab === 'ar' ? 'active' : ''}`}
-              style={{
-                padding: "10px 20px",
-                margin: "0 5px",
-                border: "2px solid #8B4513",
-                backgroundColor: activeTab === 'ar' ? '#8B4513' : 'white',
-                color: activeTab === 'ar' ? 'white' : '#8B4513',
-                cursor: "pointer",
-                borderRadius: "5px",
-                fontWeight: "bold"
-              }}>
-              العربية
-            </button>
-          </div>
-        </div>
-      </motion.section>
+
 
       {/* Blog Posts */}
       <motion.section
@@ -173,6 +119,7 @@ const Blog = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}>
         <div className="blog-section" style={{ padding: "40px 20px" }}>
+          <h1 style={{ fontSize: "2.5em", marginBottom: "40px", color: "#8B4513", textAlign: "center" }}>Notre Blog</h1>
           <div className="blog-posts" style={{ maxWidth: "900px", margin: "0 auto" }}>
             {posts.map((post, index) => (
               <motion.div
@@ -186,10 +133,10 @@ const Blog = () => {
                   paddingBottom: "40px",
                   borderBottom: index !== posts.length - 1 ? "2px solid #E8D5C4" : "none"
                 }}>
-                <h2 style={{ fontSize: "1.8em", color: "#8B4513", marginBottom: "10px" }}>
+                <h2 style={{ fontSize: "1.8em", color: "#8B4513", marginBottom: "10px", textAlign: lang === 'ar' ? 'right' : 'left' }}>
                   {post.title}
                 </h2>
-                <p className="blog-post-date" style={{ color: "#999", marginBottom: "30px", fontStyle: "italic" }}>
+                <p className="blog-post-date" style={{ color: "#666", marginBottom: "30px", fontStyle: "italic", textAlign: lang === 'ar' ? 'right' : 'left' }}>
                   {post.date}
                 </p>
 
@@ -225,9 +172,10 @@ const Blog = () => {
                 <p className="blog-post-content" style={{
                   fontSize: "1.1em",
                   lineHeight: "1.8",
-                  color: "#333",
+                  color: "#2c2c2c",
                   marginBottom: "20px",
-                  whiteSpace: "pre-line"
+                  whiteSpace: "pre-line",
+                  textAlign: lang === 'ar' ? 'right' : 'left'
                 }}>
                   {post.content}
                 </p>
