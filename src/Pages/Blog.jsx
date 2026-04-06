@@ -3,18 +3,16 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import { useI18n } from "../Components/I18nProvider";
-import { Helmet } from "react-helmet";
+import Seo from "../Components/Seo";
 const Blog = () => {
   const { t } = useI18n();
   return (
     <div>
-      <Helmet>
-        <title>Beldi Market | Blog</title>
-        <meta
-          name="description"
-          content="Découvrez nos derniers articles sur le miel, l'artisanat et la vie en général."
-        />
-      </Helmet>
+      <Seo
+        title="Beldi Market | Blog"
+        description="Découvrez nos derniers articles sur le miel, l'artisanat et la vie en général."
+        keywords="beldi market, blog, miel, artisanat, conseils, commerce en ligne"
+      />
       <Header />
       <motion.section
         initial={{ opacity: 0, y: 50 }}

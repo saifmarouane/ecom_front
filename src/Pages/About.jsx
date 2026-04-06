@@ -2,12 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../Components/Header";
+import Seo from "../Components/Seo";
 import { useI18n } from "../Components/I18nProvider";
 
 const About = () => {
   const { t } = useI18n();
   return (
     <div>
+      <Seo
+        title="Beldi Market | À propos"
+        description="En savoir plus sur Beldi Market, la boutique en ligne marocaine dédiée aux produits locaux et au miel naturel."
+        keywords="beldi market, à propos, boutique en ligne, miel, artisanat, maroc"
+      />
       <Header />
       <motion.section
         initial={{ opacity: 0, y: 50 }}

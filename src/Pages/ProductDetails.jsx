@@ -5,7 +5,8 @@ import Header from "../Components/Header";
 import { getProductById, toServerUrl } from "../services/api";
 import { useCart } from "../Components/CartProvider";
 import { useI18n } from "../Components/I18nProvider";
-import { Helmet } from "react-helmet";
+import LazyImage from "../Components/LazyImage";
+import Seo from "../Components/Seo";
 export default function ProductDetails() {
   const { id } = useParams();
   const { t } = useI18n();
@@ -41,14 +42,16 @@ export default function ProductDetails() {
 
   return (
     <div>
-            <Helmet>
-        <title>{product.name} | Beldi Market</title>
-        <meta
-          name="description"
-          content={`Achetez ${product.name} sur Beldi Market, boutique en ligne au Maroc. ${product.description}`}
-        />
-        <meta name="keywords" content={`beldi market, ${product.name}, produits locaux, e-commerce`} />
-      </Helmet>
+      <Seo
+        title={`${product?.name || "Produit"} | Beldi Market`}
+        description={
+          product?.description
+            ? `Achetez ${product.name} sur Beldi Market, boutique en ligne au Maroc. ${product.description}`
+            : "Découvrez un produit local de Beldi Market, boutique en ligne au Maroc."
+        }
+        keywords={`beldi market, ${product?.name || "produit"}, produits locaux, e-commerce`}
+        image={imgUrl}
+      />
       <Header />
       <motion.section
         initial={{ opacity: 0, y: 18 }}
@@ -67,7 +70,7 @@ export default function ProductDetails() {
             <div className="pd-grid">
 	              <div className="pd-media">
 	                <div className="pd-media-card">
-	                  {imgUrl ? <img src={imgUrl} alt={product.name} /> : <div className="product-noimage">—</div>}
+	                  {imgUrl ? <LazyImage src={imgUrl} alt={product.name} /> : <div className="product-noimage">—</div>}
 	                </div>
 	              </div>
               <div className="pd-info">

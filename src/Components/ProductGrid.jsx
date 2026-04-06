@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "./CartProvider";
 import { useI18n } from "./I18nProvider";
 import { toServerUrl } from "../services/api";
+import LazyImage from "./LazyImage";
 
 export default function ProductGrid({ products }) {
   const cart = useCart();
@@ -17,11 +18,10 @@ export default function ProductGrid({ products }) {
           <Link to={`/products/${product.id}`} className="product-link">
             <div className="product-media">
               {product.imageLarge || product.imageSmall ? (
-                <img
+                <LazyImage
                   className="product-image"
                   src={toServerUrl(product.imageSmall || product.imageLarge)}
                   alt={product.name}
-                  loading="lazy"
                 />
               ) : (
                 <div className="product-noimage">—</div>

@@ -5,6 +5,7 @@ import { useI18n } from "../Components/I18nProvider";
 import { toServerUrl } from "../services/api";
 import ImageCropModal from "../Components/ImageCropModal";
 import AdminTable from "../Components/AdminTable";
+import LazyImage from "../Components/LazyImage";
 
 const emptyForm = { name: "", description: "", parentId: "", image: null, currentImage: "" };
 
@@ -188,7 +189,7 @@ export default function AdminCategories() {
                 label: t("image"),
                 render: (val) =>
                   val ? (
-                    <img
+                    <LazyImage
                       src={toServerUrl(val)}
                       alt="category"
                       style={{ width: 40, height: 40, borderRadius: 8, objectFit: "cover" }}

@@ -3,6 +3,7 @@ import hiveimg from '../images/hive.webp';
 import hiveDesign from '../images/hive-design.webp';
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import LazyImage from "./LazyImage";
 
 
 const HiveSection = () => {
@@ -12,11 +13,11 @@ const HiveSection = () => {
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 2, ease: "easeOut" }}>
       <div className="hive-home-section">
-        <img src={hiveDesign} alt='' className="hive-design"></img>
+        <LazyImage src={hiveDesign} alt='' className="hive-design" />
         <div className="special-wrap">
           <div className="hive-img-section">
             <div className="tilted-bg">
-              <img src={hiveimg} alt='From Hive to Home'></img></div>
+              <LazyImage src={hiveimg} alt='From Hive to Home' /></div>
           </div>
           <div className="hive-text-wrap">
             <u><h2>From Hive to Home</h2></u>

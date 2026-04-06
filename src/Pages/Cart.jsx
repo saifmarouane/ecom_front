@@ -5,6 +5,7 @@ import Header from "../Components/Header";
 import { useCart } from "../Components/CartProvider";
 import { useI18n } from "../Components/I18nProvider";
 import { useAuth } from "../Components/AuthProvider";
+import LazyImage from "../Components/LazyImage";
 import { checkoutCart, toServerUrl } from "../services/api";
 
 export default function Cart() {
@@ -70,7 +71,7 @@ export default function Cart() {
 	                  return (
 	                    <div className="cart-row" key={it.id || it.productId}>
 	                      <div className="cart-thumb">
-	                        {img ? <img src={toServerUrl(img)} alt={p.name || "product"} /> : <div className="product-noimage">—</div>}
+	                        {img ? <LazyImage src={toServerUrl(img)} alt={p.name || "product"} /> : <div className="product-noimage">—</div>}
 	                      </div>
                       <div className="cart-info">
                         <div className="cart-title">{p.name || "-"}</div>

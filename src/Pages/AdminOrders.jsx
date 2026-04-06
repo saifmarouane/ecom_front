@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { getAdminOrders, updateAdminOrderComment, updateAdminOrderStatus } from "../services/api";
 import { useI18n } from "../Components/I18nProvider";
 import { toServerUrl } from "../services/api";
+import LazyImage from "../Components/LazyImage";
 
 function toStatusOptions(t) {
   return [
@@ -331,7 +332,7 @@ export default function AdminOrders() {
                                 <div key={it.id} className="order-item">
                                   <div className="order-item__thumb">
                                     {img ? (
-                                      <img src={toServerUrl(img)} alt={p?.name || t("product")} />
+                                      <LazyImage src={toServerUrl(img)} alt={p?.name || t("product")} />
                                     ) : (
                                       <div className="order-item__noimg">—</div>
                                     )}

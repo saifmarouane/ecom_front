@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 import homeHeroImg from "../images/home-hero-img.png";
 import { useI18n } from "./I18nProvider";
+import LazyImage from "./LazyImage";
 
 export default function HeroStatic() {
   const { t } = useI18n();
@@ -45,7 +46,7 @@ export default function HeroStatic() {
       <div className="hero__visual">
         <div className="hero-card">
           <div className="tag">{t("heroCardTag")}</div>
-          <img src={homeHeroImg} alt="Honey jar" />
+          <LazyImage src={homeHeroImg} alt="Honey jar" />
           <div className="hero-card__body">
             <h3>{t("heroCardTitle")}</h3>
             <p>{t("heroCardDesc")}</p>

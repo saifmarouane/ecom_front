@@ -5,6 +5,7 @@ import { useI18n } from "./I18nProvider";
 import { useCart } from "./CartProvider";
 import { getCategories, toServerUrl } from "../services/api";
 import marklogo from '../images/marklogo.png';
+import LazyImage from "./LazyImage";
 
 function toId(value) {
   if (value === null || value === undefined) return "";
@@ -68,7 +69,7 @@ const Header = ({ showCategories = true }) => {
     <header className={`topbar ${isOpen ? "topbar-open" : ""}`}>
       <div className="topbar-inner">
         <Link className="brand" to="/">
-          <img className="brand-mark" src={marklogo} alt="BeldiMarket" />
+          <LazyImage className="brand-mark" src={marklogo} alt="BeldiMarket" />
           <span className="brand-text">{t("brandMarket")}</span>
         </Link>
 
@@ -205,7 +206,7 @@ const Header = ({ showCategories = true }) => {
                 className={`categorybar-link ${isCategoryRoute && location.pathname.startsWith(`/categories/${cat.id}`) ? "active" : ""}`}
               >
                 {cat.image ? (
-                  <img className="categorybar-thumb" src={toServerUrl(cat.image)} alt={cat.name} loading="lazy" />
+                  <LazyImage className="categorybar-thumb" src={toServerUrl(cat.image)} alt={cat.name} />
                 ) : null}
                 {cat.name}
               </Link>

@@ -5,7 +5,7 @@ import HeroStatic from "../Components/HeroStatic";
 import ProductGrid from "../Components/ProductGrid";
 import { getCategories, getProducts } from "../services/api";
 import { useI18n } from "../Components/I18nProvider";
-import { Helmet } from "react-helmet";
+import Seo from "../Components/Seo";
 function toId(value) {
   if (value === null || value === undefined) return "";
   if (typeof value === "object") {
@@ -144,15 +144,11 @@ export default function Category() {
 
   return (
     <div>
-
-       <Helmet>
-        <title>Beldi Market | Catégories</title>
-        <meta
-          name="description"
-          content="Catégories  Beldi Market, votre boutique en ligne au Maroc."
-        />
-        <meta name="keywords" content="beldi market, produits, e-commerce, maroc, miel, artisanat" />
-      </Helmet>
+      <Seo
+        title={`Beldi Market | ${category?.name || "Catégories"}`}
+        description={`Découvrez ${category?.name ? `les produits de ${category.name}` : "les catégories"} sur Beldi Market, votre boutique en ligne au Maroc.`}
+        keywords={`beldi market, ${category?.name || "catégories"}, produits, e-commerce, maroc, miel, artisanat`}
+      />
       <Header />
       <HeroStatic />
 

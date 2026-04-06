@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import honeyComb from "../images/Honeycomb.jpg";
 
 import ProductsSection from "../Components/ProductsSection";
+import LazyImage from "../Components/LazyImage";
 import Header from "../Components/Header";
 import { useI18n } from "../Components/I18nProvider";
 import HeroStatic from "../Components/HeroStatic";
-import { Helmet } from "react-helmet";
+import Seo from "../Components/Seo";
 const Home = () => {
   const { t } = useI18n();
   const highlights = [
@@ -23,18 +24,11 @@ const Home = () => {
 
   return (
     <div>
-         {/* 🏷 SEO */}
-      <Helmet>
-        <title>Beldi Market | Boutique en ligne au Maroc</title>
-        <meta
-          name="description"
-          content="Beldi Market, votre boutique en ligne au Maroc. Produits locaux, livraison rapide."
-        />
-        <meta
-          name="keywords"
-          content="beldi market, maroc, e-commerce, produits locaux, miel, artisanat"
-        />
-      </Helmet>
+      <Seo
+        title="Beldi Market | Boutique en ligne au Maroc"
+        description="Beldi Market, votre boutique en ligne au Maroc. Produits locaux, livraison rapide."
+        keywords="beldi market, maroc, e-commerce, produits locaux, miel, artisanat"
+      />
       <Header />
 
       <HeroStatic />
@@ -51,7 +45,7 @@ const Home = () => {
 
       <section className="story">
         <div className="story__image">
-          <img src={honeyComb} alt="Honeycomb" />
+          <LazyImage src={honeyComb} alt="Honeycomb" />
         </div>
         <div className="story__content">
           <p className="eyebrow">{t("storyEyebrow")}</p>

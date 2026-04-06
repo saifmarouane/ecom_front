@@ -2,19 +2,16 @@ import React from "react";
 import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import { useI18n } from "../Components/I18nProvider";
-import { Helmet } from "react-helmet";
+import Seo from "../Components/Seo";
 const Contact = () => {
   const { t } = useI18n();
   return (
     <div>
-            <Helmet>
-        <title>Beldi Market | Contacts</title>
-        <meta
-          name="description"
-          content="Contactez Beldi Market, votre boutique en ligne au Maroc."
-        />
-        <meta name="keywords" content="beldi market, produits, e-commerce, maroc, miel, artisanat" />
-      </Helmet>
+      <Seo
+        title="Beldi Market | Contacts"
+        description="Contactez Beldi Market, votre boutique en ligne au Maroc."
+        keywords="beldi market, contact, support, service client, e-commerce"
+      />
       <Header />
       <motion.section
         initial={{ opacity: 0, y: 50 }}
