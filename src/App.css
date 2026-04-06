@@ -721,6 +721,10 @@ img {
   gap: 18px;
 }
 
+.products-grid.single-product {
+  grid-template-columns: repeat(auto-fit, minmax(240px, max-content));
+}
+
 .product-card {
   background: var(--surface);
   border: 1px solid rgba(255, 255, 255, 0.05);

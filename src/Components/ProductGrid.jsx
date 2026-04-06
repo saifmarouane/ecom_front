@@ -12,7 +12,7 @@ export default function ProductGrid({ products }) {
   const list = Array.isArray(products) ? products : [];
 
   return (
-    <div className="products-grid">
+    <div className={`products-grid ${list.length === 1 ? 'single-product' : ''}`}>
       {list.map((product) => (
         <div key={product.id} className="product-card modern">
           <Link to={`/products/${product.id}`} className="product-link">
