@@ -674,6 +674,81 @@ img {
   justify-content: flex-end;
 }
 
+.testimonials {
+  max-width: 1200px;
+  margin: 60px auto;
+  text-align: center;
+}
+
+.testimonials h2 {
+  font-size: clamp(26px, 3vw, 34px);
+  margin: 0 0 40px;
+  font-family: "Sora", sans-serif;
+}
+
+.testimonials-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.testimonials-scroll {
+  display: flex;
+  gap: 20px;
+  animation: scroll 30s linear infinite;
+}
+
+.testimonial-card {
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  min-width: 300px;
+  text-align: left;
+}
+
+.testimonial-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.testimonial-rating {
+  margin-bottom: 10px;
+}
+
+.star {
+  color: var(--accent);
+  font-size: 18px;
+}
+
+.star.empty {
+  color: var(--muted);
+}
+
+.testimonial-review {
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.testimonial-name {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 @media (max-width: 900px) {
   .category-products__body {
     grid-template-columns: 1fr;

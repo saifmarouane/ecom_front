@@ -8,6 +8,7 @@ import Header from "../Components/Header";
 import { useI18n } from "../Components/I18nProvider";
 import HeroStatic from "../Components/HeroStatic";
 import Seo from "../Components/Seo";
+import TestimonialsSection from "../Components/TestimonialsSection";
 const Home = () => {
   const { t } = useI18n();
   const highlights = [
@@ -65,6 +66,8 @@ const Home = () => {
       </section>
 
       <ProductsSection />
+
+      <TestimonialsSection />
 
       <section className="cta">
         <div>
