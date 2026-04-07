@@ -136,7 +136,7 @@ const Blog = () => {
                 <h2 style={{ fontSize: "1.8em", color: "#8B4513", marginBottom: "10px", textAlign: lang === 'ar' ? 'right' : 'left' }}>
                   {post.title}
                 </h2>
-                <p className="blog-post-date" style={{ color: "#fff", marginBottom: "30px", fontStyle: "italic", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+                <p className="blog-post-date" style={{ color: "#000", marginBottom: "30px", fontStyle: "italic", textAlign: lang === 'ar' ? 'right' : 'left' }}>
                   {post.date}
                 </p>
 
@@ -172,7 +172,7 @@ const Blog = () => {
                 <p className="blog-post-content" style={{
                   fontSize: "1.1em",
                   lineHeight: "1.8",
-                  color: "#fff",
+                  color: "#000",
                   marginBottom: "20px",
                   whiteSpace: "pre-line",
                   textAlign: lang === 'ar' ? 'right' : 'left'
