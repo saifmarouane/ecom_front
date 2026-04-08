@@ -81,17 +81,7 @@ const About = () => {
                 borderRadius: "10px",
                 overflow: "hidden"
               }}>
-              <div className="about-image-placeholder" style={{
-                width: "100%",
-                height: "100%",
-                backgroundColor: "#E8D5C4",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "2px dashed #8B4513"
-              }}>
-                <p style={{ color: "#8B4513", fontSize: "1.2em", fontWeight: "bold" }}>Image Placeholder 1</p>
-              </div>
+<img src="images/about1.png" alt="About 1" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </motion.div>
 
             <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#5b5b5b", textAlign: lang === 'ar' ? 'right' : 'left' }}>
@@ -114,17 +104,7 @@ const About = () => {
                 borderRadius: "10px",
                 overflow: "hidden"
               }}>
-              <div className="about-image-placeholder" style={{
-                width: "100%",
-                height: "100%",
-                backgroundColor: "#E8D5C4",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "2px dashed #8B4513"
-              }}>
-                <p style={{ color: "#8B4513", fontSize: "1.2em", fontWeight: "bold" }}>Image Placeholder 2</p>
-              </div>
+<img src="images/about2.png" alt="About 2" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </motion.div>
 
             <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#5b5b5b", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
@@ -147,17 +127,7 @@ const About = () => {
                 borderRadius: "10px",
                 overflow: "hidden"
               }}>
-              <div className="about-image-placeholder" style={{
-                width: "100%",
-                height: "100%",
-                backgroundColor: "#E8D5C4",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "2px dashed #8B4513"
-              }}>
-                <p style={{ color: "#8B4513", fontSize: "1.2em", fontWeight: "bold" }}>Image Placeholder 3</p>
-              </div>
+<img src="images/about3.png" alt="About 3" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </motion.div>
 
             <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "30px", color: "#5b5b5b", textAlign: lang === 'ar' ? 'right' : 'left' }}>
