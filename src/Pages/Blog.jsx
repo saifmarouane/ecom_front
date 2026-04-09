@@ -4,12 +4,10 @@ import Header from "../Components/Header";
 import Seo from "../Components/Seo";
 import { useI18n } from "../Components/I18nProvider";
 import LazyImage from "../Components/LazyImage";
-import homeHeroImg from "../images/home-hero-img.png";
 import blog1 from "../images/blog1.png";
 import blog2 from "../images/blog2.png";
 import blog3 from "../images/blog2.png";
 import blog4 from "../images/blog4.png";
-import homeFeatureBee from "../images/home-feature-bee.webp";
 import hive from "../images/hive.webp";
 
 const Blog = () => {

@@ -85,15 +85,15 @@ const About = () => {
                  borderRadius: "10px",
                  overflow: "hidden"
                }}>
-               <LazyImage 
-                 src={about1} 
-                 alt="About image 1"
-                 style={{ 
-                   width: "100%", 
-                   height: "100%", 
-                   objectFit: "cover" 
-                 }}
-               />
+<LazyImage 
+                  src={about1} 
+                  alt="About 1"
+                  style={{ 
+                    width: "100%", 
+                    height: "100%", 
+                    objectFit: "cover" 
+                  }}
+                />
              </motion.div>
 
             <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#fff", textAlign: lang === 'ar' ? 'right' : 'left' }}>
@@ -116,15 +116,15 @@ const About = () => {
                  borderRadius: "10px",
                  overflow: "hidden"
                }}>
-               <img 
-                 src={about2} 
-                 alt="About image 2"
-                 style={{ 
-                   width: "100%", 
-                   height: "100%", 
-                   objectFit: "cover" 
-                 }}
-               />
+<img 
+                  src={about2} 
+                  alt="About 2"
+                  style={{ 
+                    width: "100%", 
+                    height: "100%", 
+                    objectFit: "cover" 
+                  }}
+                />
              </motion.div>
 
             <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#fff", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
@@ -147,15 +147,15 @@ const About = () => {
                  borderRadius: "10px",
                  overflow: "hidden"
                }}>
-               <img 
-                 src={about3} 
-                 alt="About image 3"
-                 style={{ 
-                   width: "100%", 
-                   height: "100%", 
-                   objectFit: "cover" 
-                 }}
-               />
+<img 
+                  src={about3} 
+                  alt="About 3"
+                  style={{ 
+                    width: "100%", 
+                    height: "100%", 
+                    objectFit: "cover" 
+                  }}
+                />
              </motion.div>
 
             <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "30px", color: "#fff", textAlign: lang === 'ar' ? 'right' : 'left' }}>
