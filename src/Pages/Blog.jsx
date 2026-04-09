@@ -3,6 +3,14 @@ import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import Seo from "../Components/Seo";
 import { useI18n } from "../Components/I18nProvider";
+import LazyImage from "../Components/LazyImage";
+import homeHeroImg from "../images/home-hero-img.png";
+import blog1 from "../images/blog1.png";
+import blog2 from "../images/blog2.png";
+import blog3 from "../images/blog2.png";
+import blog4 from "../images/blog4.png";
+import homeFeatureBee from "../images/home-feature-bee.webp";
+import hive from "../images/hive.webp";
 
 const Blog = () => {
   const { lang } = useI18n();
@@ -136,43 +144,37 @@ const Blog = () => {
                 <h2 style={{ fontSize: "1.8em", color: "#8B4513", marginBottom: "10px", textAlign: lang === 'ar' ? 'right' : 'left' }}>
                   {post.title}
                 </h2>
-                <p className="blog-post-date" style={{ color: "#5b5b5b", marginBottom: "30px", fontStyle: "italic", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+                <p className="blog-post-date" style={{ color: "#fff", marginBottom: "30px", fontStyle: "italic", textAlign: lang === 'ar' ? 'right' : 'left' }}>
                   {post.date}
                 </p>
 
-                {/* Image Placeholder */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.1 }}
-                  style={{
-                    width: "100%",
-                    height: "350px",
-                    marginBottom: "30px",
-                    borderRadius: "10px",
-                    overflow: "hidden"
-                  }}>
-                  <div className="blog-image-placeholder" style={{
-                    width: "100%",
-                    height: "100%",
-                    backgroundColor: "#E8D5C4",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    border: "2px dashed #8B4513",
-                    padding: "20px",
-                    textAlign: "center"
-                  }}>
-                    <p style={{ color: "#8B4513", fontSize: "1.1em", fontWeight: "bold" }}>
-                      📷 {post.imageDescription}
-                    </p>
-                  </div>
-                </motion.div>
+                 {/* Image */}
+                 <motion.div
+                   initial={{ opacity: 0 }}
+                   whileInView={{ opacity: 1 }}
+                   transition={{ delay: 0.1 }}
+                   style={{
+                     width: "100%",
+                     height: "350px",
+                     marginBottom: "30px",
+                     borderRadius: "10px",
+                     overflow: "hidden"
+                   }}>
+                   <LazyImage 
+                     src={post.id === 1 ? blog1 : post.id === 2 ? blog2 : post.id === 3 ? blog3 : post.id === 4 ? blog4 : hive}
+                     alt={post.imageDescription}
+                     style={{ 
+                       width: "100%", 
+                       height: "100%", 
+                       objectFit: "cover" 
+                     }}
+                   />
+                 </motion.div>
 
                 <p className="blog-post-content" style={{
                   fontSize: "1.1em",
                   lineHeight: "1.8",
-                  color: "#5b5b5b",
+                  color: "#fff",
                   marginBottom: "20px",
                   whiteSpace: "pre-line",
                   textAlign: lang === 'ar' ? 'right' : 'left'

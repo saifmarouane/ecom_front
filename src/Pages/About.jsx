@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import Seo from "../Components/Seo";
 import { useI18n } from "../Components/I18nProvider";
+import LazyImage from "../Components/LazyImage";
+import about1 from "../images/about1.png";
+import about2 from "../images/about2.png";
+import about3 from "../images/about3.png";
 
 const About = () => {
   const { lang } = useI18n();
@@ -65,76 +69,100 @@ const About = () => {
               {currentContent.title}
             </h1>
             
-            <p style={{ fontSize: "1.3em", fontStyle: "italic", marginBottom: "40px", lineHeight: "1.6", whiteSpace: "pre-line", color: "#5b5b5b", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p style={{ fontSize: "1.3em", fontStyle: "italic", marginBottom: "40px", lineHeight: "1.6", whiteSpace: "pre-line", color: "#fff", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.subtitle}
             </p>
 
-            {/* Image 1 */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              style={{
-                width: "100%",
-                height: "300px",
-                marginBottom: "30px",
-                borderRadius: "10px",
-                overflow: "hidden"
-              }}>
-<img src="images/about1.png" alt="About 1" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            </motion.div>
+             {/* Image 1 */}
+             <motion.div
+               initial={{ opacity: 0 }}
+               whileInView={{ opacity: 1 }}
+               transition={{ delay: 0.2 }}
+               style={{
+                 width: "100%",
+                 height: "300px",
+                 marginBottom: "30px",
+                 borderRadius: "10px",
+                 overflow: "hidden"
+               }}>
+               <LazyImage 
+                 src={about1} 
+                 alt="About image 1"
+                 style={{ 
+                   width: "100%", 
+                   height: "100%", 
+                   objectFit: "cover" 
+                 }}
+               />
+             </motion.div>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#5b5b5b", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#fff", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph1}
             </p>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#5b5b5b", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#fff", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph2}
             </p>
 
-            {/* Image 2 */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              style={{
-                width: "100%",
-                height: "300px",
-                marginBottom: "30px",
-                borderRadius: "10px",
-                overflow: "hidden"
-              }}>
-<img src="images/about2.png" alt="About 2" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            </motion.div>
+             {/* Image 2 */}
+             <motion.div
+               initial={{ opacity: 0 }}
+               whileInView={{ opacity: 1 }}
+               transition={{ delay: 0.4 }}
+               style={{
+                 width: "100%",
+                 height: "300px",
+                 marginBottom: "30px",
+                 borderRadius: "10px",
+                 overflow: "hidden"
+               }}>
+               <img 
+                 src={about2} 
+                 alt="About image 2"
+                 style={{ 
+                   width: "100%", 
+                   height: "100%", 
+                   objectFit: "cover" 
+                 }}
+               />
+             </motion.div>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#5b5b5b", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#fff", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph3}
             </p>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#5b5b5b", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#fff", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph4}
             </p>
 
-            {/* Image 3 */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              style={{
-                width: "100%",
-                height: "300px",
-                marginBottom: "30px",
-                borderRadius: "10px",
-                overflow: "hidden"
-              }}>
-<img src="images/about3.png" alt="About 3" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            </motion.div>
+             {/* Image 3 */}
+             <motion.div
+               initial={{ opacity: 0 }}
+               whileInView={{ opacity: 1 }}
+               transition={{ delay: 0.6 }}
+               style={{
+                 width: "100%",
+                 height: "300px",
+                 marginBottom: "30px",
+                 borderRadius: "10px",
+                 overflow: "hidden"
+               }}>
+               <img 
+                 src={about3} 
+                 alt="About image 3"
+                 style={{ 
+                   width: "100%", 
+                   height: "100%", 
+                   objectFit: "cover" 
+                 }}
+               />
+             </motion.div>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "30px", color: "#5b5b5b", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "30px", color: "#fff", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph5}
             </p>
 
-            <h2 style={{ fontSize: "1.8em", fontStyle: "italic", color: "#5b5b5b", marginTop: "30px", paddingTop: "30px", borderTop: "2px solid #E8D5C4", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <h2 style={{ fontSize: "1.8em", fontStyle: "italic", color: "#fff", marginTop: "30px", paddingTop: "30px", borderTop: "2px solid #E8D5C4", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.closing}
             </h2>
 
