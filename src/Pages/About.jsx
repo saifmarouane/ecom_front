@@ -69,7 +69,7 @@ const About = () => {
               {currentContent.title}
             </h1>
             
-            <p style={{ fontSize: "1.3em", fontStyle: "italic", marginBottom: "40px", lineHeight: "1.6", whiteSpace: "pre-line", color: "#fff", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p style={{ fontSize: "1.3em", fontStyle: "italic", marginBottom: "40px", lineHeight: "1.6", whiteSpace: "pre-line", color: "#8b5e3c", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.subtitle}
             </p>
 
@@ -96,11 +96,11 @@ const About = () => {
                 />
              </motion.div>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#fff", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#8b5e3c", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph1}
             </p>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#fff", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#8b5e3c", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph2}
             </p>
 
@@ -127,11 +127,11 @@ const About = () => {
                 />
              </motion.div>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#fff", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#8b5e3c", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph3}
             </p>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#fff", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#8b5e3c", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph4}
             </p>
 
@@ -158,11 +158,11 @@ const About = () => {
                 />
              </motion.div>
 
-            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "30px", color: "#fff", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "30px", color: "#8b5e3c", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph5}
             </p>
 
-            <h2 style={{ fontSize: "1.8em", fontStyle: "italic", color: "#fff", marginTop: "30px", paddingTop: "30px", borderTop: "2px solid #E8D5C4", textAlign: lang === 'ar' ? 'right' : 'left' }}>
+            <h2 style={{ fontSize: "1.8em", fontStyle: "italic", color: "#8b5e3c", marginTop: "30px", paddingTop: "30px", borderTop: "2px solid #E8D5C4", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.closing}
             </h2>
 
