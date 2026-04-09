@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.d0ee8f29.css",
-    "main.js": "/static/js/main.4671b8bd.js",
+    "main.css": "/static/css/main.ca891a89.css",
+    "main.js": "/static/js/main.4b2963a0.js",
     "static/js/488.3f79be7a.chunk.js": "/static/js/488.3f79be7a.chunk.js",
     "static/media/blog2.png": "/static/media/blog2.25000c203f43157165ed.png",
     "static/media/about1.png": "/static/media/about1.93ae1ea44e9f9b611f14.png",
+    "static/media/marklogo.png": "/static/media/marklogo.ccd381ae6ac01d02986b.png",
     "static/media/blog1.png": "/static/media/blog1.71b2437b6a2e3bf5a972.png",
     "static/media/about2.png": "/static/media/about2.3f724282e7215f19ac39.png",
     "static/media/about3.png": "/static/media/about3.61cb82f34448bfe525e7.png",
     "static/media/blog4.png": "/static/media/blog4.f6f9f2cb7fb8ef38a368.png",
     "static/media/Honeycomb.jpg": "/static/media/Honeycomb.96c49849c5dcc9dbe200.jpg",
     "static/media/home-hero-img.png": "/static/media/home-hero-img.e415a0741207ff9bdab9.png",
-    "static/media/marklogo.png": "/static/media/marklogo.53b4a9ec1a09af037668.png",
     "index.html": "/index.html",
     "static/media/hive.webp": "/static/media/hive.63200eed2124871f6728.webp",
-    "main.d0ee8f29.css.map": "/static/css/main.d0ee8f29.css.map",
-    "main.4671b8bd.js.map": "/static/js/main.4671b8bd.js.map",
+    "main.ca891a89.css.map": "/static/css/main.ca891a89.css.map",
+    "main.4b2963a0.js.map": "/static/js/main.4b2963a0.js.map",
     "488.3f79be7a.chunk.js.map": "/static/js/488.3f79be7a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d0ee8f29.css",
-    "static/js/main.4671b8bd.js"
+    "static/css/main.ca891a89.css",
+    "static/js/main.4b2963a0.js"
   ]
 }
