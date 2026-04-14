@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useI18n } from './I18nProvider';
+import './TestimonialsSection.css';
 
 const TestimonialsSection = () => {
   const { t } = useI18n();
+  const scrollContainerRef = useRef(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
 
   const testimonials = [
     {
@@ -52,14 +55,72 @@ const TestimonialsSection = () => {
     return stars;
   };
 
+  // Auto scroll functionality - smoother scrolling
+  useEffect(() => {
+    let intervalId;
+    if (isAutoScrolling && scrollContainerRef.current) {
+      intervalId = setInterval(() => {
+        // Smooth scroll by 1px for better visual effect
+        scrollContainerRef.current.scrollLeft += 1;
+        // Reset scroll position when it reaches the end of first set
+        if (scrollContainerRef.current.scrollLeft >= 
+            scrollContainerRef.current.scrollWidth / 2) {
+          scrollContainerRef.current.scrollLeft = 0;
+        }
+      }, 16); // ~60fps for smoother animation
+    }
+    return () => clearInterval(intervalId);
+  }, [isAutoScrolling]);
+
+// Manual scroll functions - scroll by exact card width with fallback
+   const scrollLeft = () => {
+     if (scrollContainerRef.current) {
+       // Use fixed values that match CSS to avoid timing issues
+       const cardWidth = 280; // Matches CSS width
+       const gap = 32; // 2rem = 32px
+       scrollContainerRef.current.scrollLeft -= (cardWidth + gap);
+     }
+   };
+
+   const scrollRight = () => {
+     if (scrollContainerRef.current) {
+       // Use fixed values that match CSS to avoid timing issues
+       const cardWidth = 280; // Matches CSS width
+       const gap = 32; // 2rem = 32px
+       scrollContainerRef.current.scrollLeft += (cardWidth + gap);
+     }
+   };
+
+  // Pause auto-scroll on hover
+  const handleMouseEnter = () => setIsAutoScrolling(false);
+  const handleMouseLeave = () => setIsAutoScrolling(true);
+
   return (
     <section className="testimonials">
       <h2>{t('testimonialsTitle')}</h2>
       <div className="testimonials-container">
-        <div className="testimonials-scroll">
+        {/* Navigation buttons */}
+        <button 
+          className="nav-button nav-left" 
+          onClick={scrollLeft}
+          aria-label="Scroll left"
+        >
+          &#9664;
+        </button>
+        
+        <div 
+          className="testimonials-scroll" 
+          ref={scrollContainerRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           {duplicatedTestimonials.map((testimonial, index) => (
             <div key={index} className="testimonial-card">
-              <img src={testimonial.image} alt={testimonial.name} className="testimonial-image" />
+              <img 
+                src={testimonial.image} 
+                alt={testimonial.name} 
+                className="testimonial-image"
+              />
               <div className="testimonial-content">
                 <div className="testimonial-rating">
                   {renderStars(testimonial.rating)}
@@ -70,6 +131,14 @@ const TestimonialsSection = () => {
             </div>
           ))}
         </div>
+        
+        <button 
+          className="nav-button nav-right" 
+          onClick={scrollRight}
+          aria-label="Scroll right"
+        >
+          &#9654;
+        </button>
       </div>
     </section>
   );
