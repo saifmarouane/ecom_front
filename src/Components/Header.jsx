@@ -4,8 +4,17 @@ import { useAuth } from "./AuthProvider";
 import { useI18n } from "./I18nProvider";
 import { useCart } from "./CartProvider";
 import { getCategories, toServerUrl } from "../services/api";
-import marklogo from '../images/marklogo.png';
 import LazyImage from "./LazyImage";
+import OptimizedPicture from "./OptimizedPicture";
+
+import marklogoAvif640 from "../images/optimized/marklogo-w640.avif";
+import marklogoAvif960 from "../images/optimized/marklogo-w960.avif";
+import marklogoAvif1280 from "../images/optimized/marklogo-w1280.avif";
+import marklogoAvif1600 from "../images/optimized/marklogo-w1600.avif";
+import marklogoWebp640 from "../images/optimized/marklogo-w640.webp";
+import marklogoWebp960 from "../images/optimized/marklogo-w960.webp";
+import marklogoWebp1280 from "../images/optimized/marklogo-w1280.webp";
+import marklogoWebp1600 from "../images/optimized/marklogo-w1600.webp";
 
 function toId(value) {
   if (value === null || value === undefined) return "";
@@ -66,12 +75,25 @@ const Header = ({ showCategories = true }) => {
   const isCategoryRoute = location.pathname.startsWith("/categories/");
 
   return (
-    <header className={`topbar ${isOpen ? "topbar-open" : ""}`}>
-      <div className="topbar-inner">
-        <Link className="brand" to="/">
-          <LazyImage className="brand-mark" src={marklogo} alt="BeldiMarket" />
-          <span className="brand-text">{t("brandMarket")}</span>
-        </Link>
+	    <header className={`topbar ${isOpen ? "topbar-open" : ""}`}>
+	      <div className="topbar-inner">
+	        <Link className="brand" to="/">
+	          <OptimizedPicture
+	            alt="BeldiMarket"
+	            width={1536}
+	            height={1536}
+	            loading="eager"
+	            fetchPriority="high"
+	            sizes="64px"
+	            srcSetAvif={`${marklogoAvif640} 640w, ${marklogoAvif960} 960w, ${marklogoAvif1280} 1280w, ${marklogoAvif1600} 1600w`}
+	            srcSetWebp={`${marklogoWebp640} 640w, ${marklogoWebp960} 960w, ${marklogoWebp1280} 1280w, ${marklogoWebp1600} 1600w`}
+	            src={marklogoWebp640}
+	            imgClassName="brand-mark"
+	            imgStyle={{ width: 64, height: 64 }}
+	            style={{ display: "block" }}
+	          />
+	          <span className="brand-text">{t("brandMarket")}</span>
+	        </Link>
 
         <button
           className="nav-toggle"
@@ -205,9 +227,15 @@ const Header = ({ showCategories = true }) => {
                 to={`/categories/${cat.id}`}
                 className={`categorybar-link ${isCategoryRoute && location.pathname.startsWith(`/categories/${cat.id}`) ? "active" : ""}`}
               >
-                {cat.image ? (
-                  <LazyImage className="categorybar-thumb" src={toServerUrl(cat.image)} alt={cat.name} />
-                ) : null}
+	                {cat.image ? (
+	                  <LazyImage
+	                    className="categorybar-thumb"
+	                    src={toServerUrl(cat.image)}
+	                    alt={cat.name}
+	                    width={92}
+	                    height={58}
+	                  />
+	                ) : null}
                 {cat.name}
               </Link>
             ))}

@@ -1,21 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 
-import homeHeroImg from "../images/home-hero-img.png";
 import { useI18n } from "./I18nProvider";
-import LazyImage from "./LazyImage";
+import OptimizedPicture from "./OptimizedPicture";
+
+import homeHeroImgAvif640 from "../images/optimized/home-hero-img-w640.avif";
+import homeHeroImgAvif960 from "../images/optimized/home-hero-img-w960.avif";
+import homeHeroImgAvif1280 from "../images/optimized/home-hero-img-w1280.avif";
+import homeHeroImgAvif1600 from "../images/optimized/home-hero-img-w1600.avif";
+import homeHeroImgWebp640 from "../images/optimized/home-hero-img-w640.webp";
+import homeHeroImgWebp960 from "../images/optimized/home-hero-img-w960.webp";
+import homeHeroImgWebp1280 from "../images/optimized/home-hero-img-w1280.webp";
+import homeHeroImgWebp1600 from "../images/optimized/home-hero-img-w1600.webp";
 
 export default function HeroStatic() {
   const { t } = useI18n();
 
   return (
-    <motion.section
-      className="hero"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, ease: "easeOut" }}
-    >
+    <section className="hero">
       <div className="hero__content">
         <p className="eyebrow">{t("heroEyebrow")}</p>
         <h1>{t("heroTitle")}</h1>
@@ -46,7 +48,18 @@ export default function HeroStatic() {
       <div className="hero__visual">
         <div className="hero-card">
           <div className="tag">{t("heroCardTag")}</div>
-          <LazyImage src={homeHeroImg} alt="Honey jar" />
+          <OptimizedPicture
+            alt="Honey jar"
+            width={2752}
+            height={1536}
+            loading="eager"
+            fetchPriority="high"
+            sizes="(max-width: 980px) 92vw, 520px"
+            srcSetAvif={`${homeHeroImgAvif640} 640w, ${homeHeroImgAvif960} 960w, ${homeHeroImgAvif1280} 1280w, ${homeHeroImgAvif1600} 1600w`}
+            srcSetWebp={`${homeHeroImgWebp640} 640w, ${homeHeroImgWebp960} 960w, ${homeHeroImgWebp1280} 1280w, ${homeHeroImgWebp1600} 1600w`}
+            src={homeHeroImgWebp960}
+            style={{ display: "block" }}
+          />
           <div className="hero-card__body">
             <h3>{t("heroCardTitle")}</h3>
             <p>{t("heroCardDesc")}</p>
@@ -60,7 +73,6 @@ export default function HeroStatic() {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
-

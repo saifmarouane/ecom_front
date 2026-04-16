@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkbee_pure=self.webpackChunkbee_pure||[]).push([[432],{5051:(e,a,s)=>{s.r(a),s.d(a,{default:()=>p});s(5043);var r=s(8163),u=s(579);const p=()=>(0,u.jsx)(r.C5,{to:"/admin/dashboard",replace:!0})}}]);
+//# sourceMappingURL=432.fb66d99c.chunk.js.map

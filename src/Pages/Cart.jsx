@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import { useCart } from "../Components/CartProvider";
 import { useI18n } from "../Components/I18nProvider";
 import { useAuth } from "../Components/AuthProvider";
 import LazyImage from "../Components/LazyImage";
 import { checkoutCart, toServerUrl } from "../services/api";
+import Reveal from "../Components/Reveal";
 
 export default function Cart() {
   const { t } = useI18n();
@@ -41,11 +41,7 @@ export default function Cart() {
   return (
     <div>
       <Header />
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
+      <Reveal as="section">
         <div className="cart-page">
           <div className="cart-head">
             <h1>{t("cart")}</h1>
@@ -71,7 +67,7 @@ export default function Cart() {
 	                  return (
 	                    <div className="cart-row" key={it.id || it.productId}>
 	                      <div className="cart-thumb">
-	                        {img ? <LazyImage src={toServerUrl(img)} alt={p.name || "product"} /> : <div className="product-noimage">—</div>}
+	                        {img ? <LazyImage src={toServerUrl(img)} alt={p.name || "product"} width={800} height={600} /> : <div className="product-noimage">—</div>}
 	                      </div>
                       <div className="cart-info">
                         <div className="cart-title">{p.name || "-"}</div>
@@ -117,7 +113,7 @@ export default function Cart() {
 	            </div>
 	          )}
 	        </div>
-      </motion.section>
+      </Reveal>
     </div>
   );
 }

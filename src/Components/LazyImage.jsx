@@ -12,6 +12,8 @@ export default function LazyImage({ src, alt = "", className, style, placeholder
       placeholderSrc={placeholderSrc}
       effect="blur"
       threshold={100}
+      loading={props.loading || "lazy"}
+      decoding={props.decoding || "async"}
       {...props}
     />
   );

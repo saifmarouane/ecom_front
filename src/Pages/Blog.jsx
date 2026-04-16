@@ -1,13 +1,44 @@
 import React from "react";
-import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import Seo from "../Components/Seo";
 import { useI18n } from "../Components/I18nProvider";
-import LazyImage from "../Components/LazyImage";
-import blog1 from "../images/blog1.png";
-import blog2 from "../images/blog2.png";
-import blog3 from "../images/blog2.png";
-import blog4 from "../images/blog4.png";
+import OptimizedPicture from "../Components/OptimizedPicture";
+import Reveal from "../Components/Reveal";
+import blog1Avif640 from "../images/optimized/blog1-w640.avif";
+import blog1Avif960 from "../images/optimized/blog1-w960.avif";
+import blog1Avif1280 from "../images/optimized/blog1-w1280.avif";
+import blog1Avif1600 from "../images/optimized/blog1-w1600.avif";
+import blog1Webp640 from "../images/optimized/blog1-w640.webp";
+import blog1Webp960 from "../images/optimized/blog1-w960.webp";
+import blog1Webp1280 from "../images/optimized/blog1-w1280.webp";
+import blog1Webp1600 from "../images/optimized/blog1-w1600.webp";
+
+import blog2Avif640 from "../images/optimized/blog2-w640.avif";
+import blog2Avif960 from "../images/optimized/blog2-w960.avif";
+import blog2Avif1280 from "../images/optimized/blog2-w1280.avif";
+import blog2Avif1600 from "../images/optimized/blog2-w1600.avif";
+import blog2Webp640 from "../images/optimized/blog2-w640.webp";
+import blog2Webp960 from "../images/optimized/blog2-w960.webp";
+import blog2Webp1280 from "../images/optimized/blog2-w1280.webp";
+import blog2Webp1600 from "../images/optimized/blog2-w1600.webp";
+
+import blog3Avif640 from "../images/optimized/blog3-w640.avif";
+import blog3Avif960 from "../images/optimized/blog3-w960.avif";
+import blog3Avif1280 from "../images/optimized/blog3-w1280.avif";
+import blog3Avif1600 from "../images/optimized/blog3-w1600.avif";
+import blog3Webp640 from "../images/optimized/blog3-w640.webp";
+import blog3Webp960 from "../images/optimized/blog3-w960.webp";
+import blog3Webp1280 from "../images/optimized/blog3-w1280.webp";
+import blog3Webp1600 from "../images/optimized/blog3-w1600.webp";
+
+import blog4Avif640 from "../images/optimized/blog4-w640.avif";
+import blog4Avif960 from "../images/optimized/blog4-w960.avif";
+import blog4Avif1280 from "../images/optimized/blog4-w1280.avif";
+import blog4Avif1600 from "../images/optimized/blog4-w1600.avif";
+import blog4Webp640 from "../images/optimized/blog4-w640.webp";
+import blog4Webp960 from "../images/optimized/blog4-w960.webp";
+import blog4Webp1280 from "../images/optimized/blog4-w1280.webp";
+import blog4Webp1600 from "../images/optimized/blog4-w1600.webp";
 import hive from "../images/hive.webp";
 
 const Blog = () => {
@@ -120,20 +151,15 @@ const Blog = () => {
 
 
       {/* Blog Posts */}
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}>
+      <Reveal as="section">
         <div className="blog-section" style={{ padding: "40px 20px" }}>
           <h1 style={{ fontSize: "2.5em", marginBottom: "40px", color: "#8B4513", textAlign: "center" }}>Notre Blog</h1>
           <div className="blog-posts" style={{ maxWidth: "900px", margin: "0 auto" }}>
             {posts.map((post, index) => (
-              <motion.div
+              <Reveal
+                as="div"
                 key={post.id}
                 className="blog-post"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
                 style={{
                   marginBottom: "50px",
                   paddingBottom: "40px",
@@ -147,27 +173,73 @@ const Blog = () => {
                 </p>
 
                  {/* Image */}
-                 <motion.div
-                   initial={{ opacity: 0 }}
-                   whileInView={{ opacity: 1 }}
-                   transition={{ delay: 0.1 }}
-                   style={{
-                     width: "100%",
-                     height: "350px",
-                     marginBottom: "30px",
-                     borderRadius: "10px",
-                     overflow: "hidden"
-                   }}>
-                   <LazyImage 
-                     src={post.id === 1 ? blog1 : post.id === 2 ? blog2 : post.id === 3 ? blog3 : post.id === 4 ? blog4 : hive}
-                     alt={post.imageDescription}
-                     style={{ 
-                       width: "100%", 
-                       height: "100%", 
-                       objectFit: "cover" 
-                     }}
-                   />
-                 </motion.div>
+	                 <Reveal as="div" style={{
+	                     width: "100%",
+	                     height: "350px",
+	                     marginBottom: "30px",
+	                     borderRadius: "10px",
+	                     overflow: "hidden"
+	                   }}>
+                     {post.id === 1 ? (
+                       <OptimizedPicture
+                         alt={post.imageDescription}
+                         width={2752}
+                         height={1536}
+                         sizes="(max-width: 980px) 92vw, 900px"
+                         srcSetAvif={`${blog1Avif640} 640w, ${blog1Avif960} 960w, ${blog1Avif1280} 1280w, ${blog1Avif1600} 1600w`}
+                         srcSetWebp={`${blog1Webp640} 640w, ${blog1Webp960} 960w, ${blog1Webp1280} 1280w, ${blog1Webp1600} 1600w`}
+                         src={blog1Webp960}
+                         style={{ display: "block", width: "100%", height: "100%" }}
+                         imgStyle={{ width: "100%", height: "100%", objectFit: "cover" }}
+                       />
+                     ) : post.id === 2 ? (
+                       <OptimizedPicture
+                         alt={post.imageDescription}
+                         width={2752}
+                         height={1536}
+                         sizes="(max-width: 980px) 92vw, 900px"
+                         srcSetAvif={`${blog2Avif640} 640w, ${blog2Avif960} 960w, ${blog2Avif1280} 1280w, ${blog2Avif1600} 1600w`}
+                         srcSetWebp={`${blog2Webp640} 640w, ${blog2Webp960} 960w, ${blog2Webp1280} 1280w, ${blog2Webp1600} 1600w`}
+                         src={blog2Webp960}
+                         style={{ display: "block", width: "100%", height: "100%" }}
+                         imgStyle={{ width: "100%", height: "100%", objectFit: "cover" }}
+                       />
+                     ) : post.id === 3 ? (
+                       <OptimizedPicture
+                         alt={post.imageDescription}
+                         width={2752}
+                         height={1536}
+                         sizes="(max-width: 980px) 92vw, 900px"
+                         srcSetAvif={`${blog3Avif640} 640w, ${blog3Avif960} 960w, ${blog3Avif1280} 1280w, ${blog3Avif1600} 1600w`}
+                         srcSetWebp={`${blog3Webp640} 640w, ${blog3Webp960} 960w, ${blog3Webp1280} 1280w, ${blog3Webp1600} 1600w`}
+                         src={blog3Webp960}
+                         style={{ display: "block", width: "100%", height: "100%" }}
+                         imgStyle={{ width: "100%", height: "100%", objectFit: "cover" }}
+                       />
+                     ) : post.id === 4 ? (
+                       <OptimizedPicture
+                         alt={post.imageDescription}
+                         width={2752}
+                         height={1536}
+                         sizes="(max-width: 980px) 92vw, 900px"
+                         srcSetAvif={`${blog4Avif640} 640w, ${blog4Avif960} 960w, ${blog4Avif1280} 1280w, ${blog4Avif1600} 1600w`}
+                         srcSetWebp={`${blog4Webp640} 640w, ${blog4Webp960} 960w, ${blog4Webp1280} 1280w, ${blog4Webp1600} 1600w`}
+                         src={blog4Webp960}
+                         style={{ display: "block", width: "100%", height: "100%" }}
+                         imgStyle={{ width: "100%", height: "100%", objectFit: "cover" }}
+                       />
+                     ) : (
+                       <img
+                         src={hive}
+                         alt={post.imageDescription}
+                         width={800}
+                         height={800}
+                         loading="lazy"
+                         decoding="async"
+                         style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                       />
+                     )}
+	                 </Reveal>
 
                 <p className="blog-post-content" style={{
                   fontSize: "1.1em",
@@ -179,11 +251,11 @@ const Blog = () => {
                 }}>
                   {post.content}
                 </p>
-              </motion.div>
+	              </Reveal>
             ))}
           </div>
         </div>
-      </motion.section>
+      </Reveal>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import React from "react";
-import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import ProductsSection from "../Components/ProductsSection";
 import { useI18n } from "../Components/I18nProvider";
 import Seo from "../Components/Seo";
+import Reveal from "../Components/Reveal";
 const Products = () => {
   const { t } = useI18n();
   return (
@@ -14,10 +14,7 @@ const Products = () => {
         keywords="beldi market, produits, e-commerce, maroc, miel, artisanat"
       />
       <Header />
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}>
+      <Reveal as="section">
         <div className="products-page">
           <h1>{t('productsPageTitle')}</h1>
           <p className="products-page-intro">
@@ -25,7 +22,7 @@ const Products = () => {
           </p>
           <ProductsSection />
         </div>
-      </motion.section>
+      </Reveal>
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import { loginAdmin } from "../services/api";
 import { useAuth } from "../Components/AuthProvider";
 import { useI18n } from "../Components/I18nProvider";
+import Reveal from "../Components/Reveal";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -36,15 +36,11 @@ const AdminLogin = () => {
     }
   };
 
-  return (
-    <div>
-      <Header />
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <div className="auth-card">
+	  return (
+	    <div>
+	      <Header />
+	      <Reveal as="section">
+	        <div className="auth-card">
           <div>
             <p className="eyebrow">{t("adminLogin")}</p>
             <h1>{t("loginTitle")}</h1>
@@ -80,10 +76,10 @@ const AdminLogin = () => {
               {loading ? "..." : t("loginBtn")}
             </button>
           </form>
-        </div>
-      </motion.section>
-    </div>
-  );
-};
+	        </div>
+	      </Reveal>
+	    </div>
+	  );
+	};
 
 export default AdminLogin;

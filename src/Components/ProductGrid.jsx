@@ -17,15 +17,17 @@ export default function ProductGrid({ products }) {
         <div key={product.id} className="product-card modern">
           <Link to={`/products/${product.id}`} className="product-link">
             <div className="product-media">
-              {product.imageLarge || product.imageSmall ? (
-                <LazyImage
-                  className="product-image"
-                  src={toServerUrl(product.imageSmall || product.imageLarge)}
-                  alt={product.name}
-                />
-              ) : (
-                <div className="product-noimage">—</div>
-              )}
+	              {product.imageLarge || product.imageSmall ? (
+	                <LazyImage
+	                  className="product-image"
+	                  src={toServerUrl(product.imageSmall || product.imageLarge)}
+	                  alt={product.name}
+	                  width={800}
+	                  height={600}
+	                />
+	              ) : (
+	                <div className="product-noimage">—</div>
+	              )}
               {product.category?.name && (
                 <div className="product-pill">{product.category.name}</div>
               )}

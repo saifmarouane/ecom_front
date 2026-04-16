@@ -209,16 +209,20 @@ export default function ImageCropModal({
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
         >
-          {objectUrl ? (
-            <img
-              ref={imgRef}
-              className="crop-image"
-              src={objectUrl}
-              alt=""
-              draggable={false}
-              onLoad={() => {
-                const el = imgRef.current;
-                if (!el) return;
+	          {objectUrl ? (
+	            <img
+	              ref={imgRef}
+	              className="crop-image"
+	              src={objectUrl}
+	              alt=""
+	              width={outputWidth}
+	              height={outputHeight}
+	              loading="eager"
+	              decoding="async"
+	              draggable={false}
+	              onLoad={() => {
+	                const el = imgRef.current;
+	                if (!el) return;
                 setImgSize({ w: el.naturalWidth, h: el.naturalHeight });
               }}
               style={{
@@ -255,4 +259,3 @@ export default function ImageCropModal({
     </div>
   );
 }
-

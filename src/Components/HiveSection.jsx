@@ -2,16 +2,13 @@ import React from "react";
 import hiveimg from '../images/hive.webp';
 import hiveDesign from '../images/hive-design.webp';
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import LazyImage from "./LazyImage";
+import Reveal from "./Reveal";
 
 
 const HiveSection = () => {
   return (
-    <motion.section
-      initial={{ opacity: 0, x: -50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 2, ease: "easeOut" }}>
+    <Reveal as="section">
       <div className="hive-home-section">
         <LazyImage src={hiveDesign} alt='' className="hive-design" />
         <div className="special-wrap">
@@ -26,7 +23,7 @@ const HiveSection = () => {
           </div>
         </div>
       </div>
-    </motion.section>
+    </Reveal>
   )
 }
 

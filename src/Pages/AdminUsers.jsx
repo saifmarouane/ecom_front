@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { createAdminUser, deleteAdminUser, getAdminUsers, updateAdminUser } from "../services/api";
 import { useI18n } from "../Components/I18nProvider";
 import AdminTable from "../Components/AdminTable";
@@ -78,7 +77,7 @@ export default function AdminUsers() {
   };
 
   return (
-    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+    <div>
       <div className="admin-header">
         <h1>{t("adminUsers")}</h1>
         <p className="admin-dashboard-intro">{t("adminCrudHint")}</p>
@@ -132,6 +131,6 @@ export default function AdminUsers() {
           />
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

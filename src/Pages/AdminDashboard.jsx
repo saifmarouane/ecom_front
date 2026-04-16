@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { useI18n } from "../Components/I18nProvider";
 import { getAdminOrderStats } from "../services/api";
 
@@ -46,7 +45,7 @@ const AdminDashboard = () => {
   const totalOrders = Number(stats?.total || 0);
 
   return (
-    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+    <div>
       <div className="admin-header">
         <h1>{t('dashboardTitle')}</h1>
         <p className="admin-dashboard-intro">{t('dashboardIntro')}</p>
@@ -106,7 +105,7 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

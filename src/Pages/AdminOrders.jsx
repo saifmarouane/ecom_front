@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import { getAdminOrders, updateAdminOrderComment, updateAdminOrderStatus } from "../services/api";
 import { useI18n } from "../Components/I18nProvider";
 import { toServerUrl } from "../services/api";
@@ -164,7 +163,7 @@ export default function AdminOrders() {
 
 
   return (
-    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+    <div>
       <div className="admin-header">
         <h1>{t("adminOrders")}</h1>
         <p className="admin-dashboard-intro">{t("adminOrdersIntro")}</p>
@@ -332,7 +331,7 @@ export default function AdminOrders() {
                                 <div key={it.id} className="order-item">
                                   <div className="order-item__thumb">
                                     {img ? (
-                                      <LazyImage src={toServerUrl(img)} alt={p?.name || t("product")} />
+                                      <LazyImage src={toServerUrl(img)} alt={p?.name || t("product")} width={84} height={84} />
                                     ) : (
                                       <div className="order-item__noimg">—</div>
                                     )}
@@ -374,6 +373,6 @@ export default function AdminOrders() {
           </div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }

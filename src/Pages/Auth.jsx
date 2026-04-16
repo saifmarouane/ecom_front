@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import { loginAdmin, registerClient } from "../services/api";
 import { useAuth } from "../Components/AuthProvider";
 import { useI18n } from "../Components/I18nProvider";
+import Reveal from "../Components/Reveal";
 
 function useQueryMode(location) {
   const params = new URLSearchParams(location.search);
@@ -81,15 +81,11 @@ const Auth = () => {
     }
   };
 
-  return (
-    <div>
-      <Header />
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <div className="auth-card">
+	  return (
+	    <div>
+	      <Header />
+	      <Reveal as="section">
+	        <div className="auth-card">
           <div className="auth-tabs">
             <button
               type="button"
@@ -202,9 +198,9 @@ const Auth = () => {
             <Link to="/">{t("backToShop")}</Link>
           </p>
         </div>
-      </motion.section>
-    </div>
-  );
-};
+	      </Reveal>
+	    </div>
+	  );
+	};
 
 export default Auth;

@@ -1,14 +1,22 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Link } from "react-router-dom";
-import honeyComb from "../images/Honeycomb.jpg";
 
-import ProductsSection from "../Components/ProductsSection";
-import LazyImage from "../Components/LazyImage";
 import Header from "../Components/Header";
 import { useI18n } from "../Components/I18nProvider";
 import HeroStatic from "../Components/HeroStatic";
 import Seo from "../Components/Seo";
-import TestimonialsSection from "../Components/TestimonialsSection";
+import OptimizedPicture from "../Components/OptimizedPicture";
+import honeyCombAvif640 from "../images/optimized/Honeycomb-w640.avif";
+import honeyCombAvif960 from "../images/optimized/Honeycomb-w960.avif";
+import honeyCombAvif1280 from "../images/optimized/Honeycomb-w1280.avif";
+import honeyCombAvif1600 from "../images/optimized/Honeycomb-w1600.avif";
+import honeyCombWebp640 from "../images/optimized/Honeycomb-w640.webp";
+import honeyCombWebp960 from "../images/optimized/Honeycomb-w960.webp";
+import honeyCombWebp1280 from "../images/optimized/Honeycomb-w1280.webp";
+import honeyCombWebp1600 from "../images/optimized/Honeycomb-w1600.webp";
+
+const ProductsSection = lazy(() => import("../Components/ProductsSection"));
+const TestimonialsSection = lazy(() => import("../Components/TestimonialsSection"));
 const Home = () => {
   const { t } = useI18n();
   const highlights = [
@@ -23,8 +31,8 @@ const Home = () => {
     { label: t("pillBee"), detail: t("pillBeeTxt") },
   ];
 
-  return (
-    <div>
+	  return (
+	    <div>
       <Seo
         title="Beldi Market | Boutique en ligne au Maroc"
         description="Beldi Market, votre boutique en ligne au Maroc. Produits locaux, livraison rapide."
@@ -46,7 +54,16 @@ const Home = () => {
 
       <section className="story">
         <div className="story__image">
-          <LazyImage src={honeyComb} alt="Honeycomb" />
+          <OptimizedPicture
+            alt="Honeycomb"
+            width={2752}
+            height={1536}
+            sizes="(max-width: 980px) 92vw, 520px"
+            srcSetAvif={`${honeyCombAvif640} 640w, ${honeyCombAvif960} 960w, ${honeyCombAvif1280} 1280w, ${honeyCombAvif1600} 1600w`}
+            srcSetWebp={`${honeyCombWebp640} 640w, ${honeyCombWebp960} 960w, ${honeyCombWebp1280} 1280w, ${honeyCombWebp1600} 1600w`}
+            src={honeyCombWebp960}
+            style={{ display: "block" }}
+          />
         </div>
         <div className="story__content">
           <p className="eyebrow">{t("storyEyebrow")}</p>
@@ -65,9 +82,13 @@ const Home = () => {
         </div>
       </section>
 
-      <ProductsSection />
+	      <Suspense fallback={null}>
+	        <ProductsSection />
+	      </Suspense>
 
-      <TestimonialsSection />
+	      <Suspense fallback={null}>
+	        <TestimonialsSection />
+	      </Suspense>
 
       <section className="cta">
         <div>

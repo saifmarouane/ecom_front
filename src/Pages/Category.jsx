@@ -6,6 +6,8 @@ import ProductGrid from "../Components/ProductGrid";
 import { getCategories, getProducts } from "../services/api";
 import { useI18n } from "../Components/I18nProvider";
 import Seo from "../Components/Seo";
+
+const PAGE_SIZE = 12
 function toId(value) {
   if (value === null || value === undefined) return "";
   if (typeof value === "object") {
@@ -38,6 +40,7 @@ export default function Category() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [visible, setVisible] = useState(PAGE_SIZE);
 
   const selectedSub = toId(searchParams.get("sub"));
   const selectedSubs = useMemo(() => parseSubList(searchParams.get("sub")), [searchParams]);
@@ -122,6 +125,19 @@ export default function Category() {
 
     return priceFiltered;
   }, [products, id, subcategories, selectedSubs, minPrice, maxPrice]);
+
+  const selectedSubsKey = useMemo(() => selectedSubs.join(","), [selectedSubs]);
+
+  useEffect(() => {
+    setVisible(PAGE_SIZE);
+  }, [id, selectedSub, minParam, maxParam, selectedSubsKey]);
+
+  const paginatedProducts = useMemo(() => {
+    const list = Array.isArray(filteredProducts) ? filteredProducts : [];
+    return list.slice(0, Math.max(PAGE_SIZE, visible));
+  }, [filteredProducts, visible]);
+
+  const canLoadMore = filteredProducts.length > paginatedProducts.length;
 
   const setParams = (next) => {
     const params = {};
@@ -236,13 +252,22 @@ export default function Category() {
               </div>
             </aside>
 
-            <div className="category-products__grid">
-              {filteredProducts.length === 0 ? (
-                <p className="products-status">{t("productsEmpty")}</p>
-              ) : (
-                <ProductGrid products={filteredProducts} />
-              )}
-            </div>
+	            <div className="category-products__grid">
+	              {filteredProducts.length === 0 ? (
+	                <p className="products-status">{t("productsEmpty")}</p>
+	              ) : (
+	                <>
+	                  <ProductGrid products={paginatedProducts} />
+	                  {canLoadMore && (
+	                    <div style={{ display: "flex", justifyContent: "center", marginTop: 14 }}>
+	                      <button type="button" className="btn ghost" onClick={() => setVisible((v) => v + PAGE_SIZE)}>
+	                        {t("loadMore") || "Load more"}
+	                      </button>
+	                    </div>
+	                  )}
+	                </>
+	              )}
+	            </div>
           </div>
         )}
       </section>

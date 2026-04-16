@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import { getProductById, toServerUrl } from "../services/api";
 import { useCart } from "../Components/CartProvider";
 import { useI18n } from "../Components/I18nProvider";
 import LazyImage from "../Components/LazyImage";
 import Seo from "../Components/Seo";
+import Reveal from "../Components/Reveal";
 export default function ProductDetails() {
   const { id } = useParams();
   const { t } = useI18n();
@@ -53,11 +53,7 @@ export default function ProductDetails() {
         image={imgUrl}
       />
       <Header />
-      <motion.section
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
+      <Reveal as="section">
         <div className="pd-wrap">
           <div className="pd-breadcrumb">
             <Link to="/products">{t("productsTitle")}</Link> / <span>{product?.name || "-"}</span>
@@ -70,9 +66,9 @@ export default function ProductDetails() {
             <div className="pd-grid">
 	              <div className="pd-media">
 	                <div className="pd-media-card">
-	                  {imgUrl ? <LazyImage src={imgUrl} alt={product.name} /> : <div className="product-noimage">—</div>}
-	                </div>
-	              </div>
+		                  {imgUrl ? <LazyImage src={imgUrl} alt={product.name} width={1600} height={1200} /> : <div className="product-noimage">—</div>}
+		                </div>
+		              </div>
               <div className="pd-info">
                 <p className="eyebrow">{product.category?.name || t("category")}</p>
                 <h1 className="pd-title">{product.name}</h1>
@@ -143,7 +139,7 @@ export default function ProductDetails() {
             </div>
           )}
         </div>
-      </motion.section>
+      </Reveal>
     </div>
   );
 }

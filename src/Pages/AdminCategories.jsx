@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import { createCategory, deleteCategory, getCategories, updateCategory } from "../services/api";
 import { useI18n } from "../Components/I18nProvider";
 import { toServerUrl } from "../services/api";
@@ -101,7 +100,7 @@ export default function AdminCategories() {
 
   return (
     <>
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+	      <div>
       <div className="admin-header">
         <h1>{t("adminCategories")}</h1>
         <p className="admin-dashboard-intro">{t("adminCrudHint")}</p>
@@ -130,20 +129,28 @@ export default function AdminCategories() {
             </label>
 	            <label>
 	              {t("categoryImage")}
-	              {form.currentImage && !form.image && (
+		              {form.currentImage && !form.image && (
+		                <img
+		                  src={toServerUrl(form.currentImage)}
+	                  alt={form.name || "category"}
+	                  width={84}
+	                  height={84}
+	                  loading="lazy"
+	                  decoding="async"
+	                  style={{ width: 84, height: 84, objectFit: "cover", borderRadius: 12, border: "1px solid rgba(255,255,255,0.12)" }}
+	                />
+	              )}
+	              {previewUrl && (
 	                <img
-	                  src={toServerUrl(form.currentImage)}
-                  alt={form.name || "category"}
-                  style={{ width: 84, height: 84, objectFit: "cover", borderRadius: 12, border: "1px solid rgba(255,255,255,0.12)" }}
-                />
-              )}
-              {previewUrl && (
-                <img
-                  src={previewUrl}
-                  alt={form.name || "category"}
-                  style={{ width: 84, height: 84, objectFit: "cover", borderRadius: 12, border: "1px solid rgba(255,255,255,0.12)" }}
-                />
-              )}
+	                  src={previewUrl}
+	                  alt={form.name || "category"}
+	                  width={84}
+	                  height={84}
+	                  loading="lazy"
+	                  decoding="async"
+	                  style={{ width: 84, height: 84, objectFit: "cover", borderRadius: 12, border: "1px solid rgba(255,255,255,0.12)" }}
+	                />
+	              )}
 	              <input
 	                type="file"
 	                accept="image/*"
@@ -216,7 +223,7 @@ export default function AdminCategories() {
           />
         </div>
 	      </div>
-      </motion.div>
+	      </div>
 
       <ImageCropModal
         open={Boolean(crop?.file)}

@@ -3,6 +3,8 @@ import { getProducts } from '../services/api'
 import { useI18n } from './I18nProvider'
 import ProductGrid from './ProductGrid'
 
+const PAGE_SIZE = 12
+
 export default function ProductsSection({ title, lede, products: productsProp }) {
   const { t } = useI18n()
 
@@ -10,6 +12,7 @@ export default function ProductsSection({ title, lede, products: productsProp })
   const [products, setProducts] = useState(() => (Array.isArray(productsProp) ? productsProp : []))
   const [loading, setLoading] = useState(!isControlled)
   const [error, setError] = useState(null)
+  const [visible, setVisible] = useState(PAGE_SIZE)
 
   const headerTitle = title || t('productsTitle')
   const headerLede = lede || t('productsLede')
@@ -17,6 +20,17 @@ export default function ProductsSection({ title, lede, products: productsProp })
   const displayProducts = useMemo(() => {
     return Array.isArray(productsProp) ? productsProp : products
   }, [productsProp, products])
+
+  useEffect(() => {
+    setVisible(PAGE_SIZE)
+  }, [displayProducts.length])
+
+  const paginatedProducts = useMemo(() => {
+    const list = Array.isArray(displayProducts) ? displayProducts : []
+    return list.slice(0, Math.max(PAGE_SIZE, visible))
+  }, [displayProducts, visible])
+
+  const canLoadMore = displayProducts.length > paginatedProducts.length
 
   useEffect(() => {
     if (Array.isArray(productsProp)) return
@@ -54,7 +68,16 @@ export default function ProductsSection({ title, lede, products: productsProp })
       {error && <p className="products-status error">{t('productsError')}</p>}
 
       {!loading && !error && (
-        <ProductGrid products={displayProducts} />
+        <>
+          <ProductGrid products={paginatedProducts} />
+          {canLoadMore && (
+            <div style={{ display: "flex", justifyContent: "center", marginTop: 14 }}>
+              <button type="button" className="btn ghost" onClick={() => setVisible((v) => v + PAGE_SIZE)}>
+                {t("loadMore") || "Load more"}
+              </button>
+            </div>
+          )}
+        </>
       )}
     </section>
   )

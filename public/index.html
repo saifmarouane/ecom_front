@@ -38,33 +38,72 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
+  <!-- Minimal critical CSS to avoid white flash before CSS bundles load -->
+  <style>
+    body { margin: 0; background: #120c08; }
+    img { max-width: 100%; height: auto; }
+  </style>
+
   <!--  Stylesheets -->
-  <link
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" media="print"
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-    rel="stylesheet" />
+    onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" />
+  </noscript>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-T3VD1LKMWC"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-T3VD1LKMWC');
+    (function () {
+      function idle(cb, timeout) {
+        if ('requestIdleCallback' in window) return window.requestIdleCallback(cb, { timeout: timeout || 2000 });
+        return window.setTimeout(cb, timeout || 2000);
+      }
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = window.gtag || gtag;
+      idle(function () {
+        gtag('js', new Date());
+        gtag('config', 'G-T3VD1LKMWC');
+      }, 1800);
+    })();
   </script>
 
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MP73SN7S');</script>
+<script>
+  (function(w,d,s,l,i){
+    function load(){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    }
+    if ('requestIdleCallback' in w) w.requestIdleCallback(load, { timeout: 2500 });
+    else w.addEventListener('load', load);
+  })(window,document,'script','dataLayer','GTM-MP73SN7S');
+</script>
 <!-- End Google Tag Manager -->
 
 <meta name="msvalidate.01" content="C0F1A544293588293D5C2A651EF6B578" />
 </head>
 
 <body>
-<script src="//code.tidio.co/rsegddxwsgewrvf2uupxd3mxul2ywtzv.js" async></script>
+<script>
+  (function () {
+    function load() {
+      var s = document.createElement('script');
+      s.src = '//code.tidio.co/rsegddxwsgewrvf2uupxd3mxul2ywtzv.js';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+    if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 4000 });
+    else setTimeout(load, 4000);
+  })();
+</script>
 
  <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MP73SN7S"

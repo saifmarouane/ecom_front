@@ -1,8 +1,8 @@
 import React from "react";
-import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import { useI18n } from "../Components/I18nProvider";
 import Seo from "../Components/Seo";
+import Reveal from "../Components/Reveal";
 const Contact = () => {
   const { t } = useI18n();
   return (
@@ -13,10 +13,7 @@ const Contact = () => {
         keywords="beldi market, contact, support, service client, e-commerce"
       />
       <Header />
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}>
+      <Reveal as="section">
         <div className="contact-section">
           <h1>{t('contactTitle')}</h1>
           <p className="contact-intro">
@@ -59,7 +56,7 @@ const Contact = () => {
             </form>
           </div>
         </div>
-      </motion.section>
+      </Reveal>
     </div>
   );
 };

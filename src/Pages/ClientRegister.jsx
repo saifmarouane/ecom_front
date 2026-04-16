@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import { registerClient } from "../services/api";
 import { useAuth } from "../Components/AuthProvider";
 import { useI18n } from "../Components/I18nProvider";
+import Reveal from "../Components/Reveal";
 
 const ClientRegister = () => {
   const navigate = useNavigate();
@@ -37,11 +37,7 @@ const ClientRegister = () => {
   return (
     <div>
       <Header />
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
+      <Reveal as="section">
         <div className="auth-card">
           <div>
             <p className="eyebrow">{t("clientRegister")}</p>
@@ -87,7 +83,7 @@ const ClientRegister = () => {
             {t("haveAccount")} <Link to="/login">{t("goLogin")}</Link>
           </p>
         </div>
-      </motion.section>
+      </Reveal>
     </div>
   );
 };

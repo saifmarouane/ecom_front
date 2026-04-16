@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
 import { createProduct, deleteProduct, getCategories, getProducts, updateProduct } from "../services/api";
 import { useI18n } from "../Components/I18nProvider";
 import ImageCropModal from "../Components/ImageCropModal";
@@ -144,7 +143,7 @@ export default function AdminProducts() {
   };
 
   return (
-    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+    <div>
       <div className="admin-header">
         <h1>{t("adminProducts")}</h1>
         <p className="admin-dashboard-intro">{t("adminCrudHint")}</p>
@@ -195,13 +194,17 @@ export default function AdminProducts() {
 	            <div className="admin-form-2">
 	              <label>
 	                {t("imageLarge")}
-                  {previewLarge && (
-                    <img
-                      src={previewLarge}
-                      alt={form.name || "product"}
-                      style={{ width: "100%", maxWidth: 260, height: 160, objectFit: "cover", borderRadius: 12, border: "1px solid rgba(255,255,255,0.12)" }}
-                    />
-                  )}
+	                  {previewLarge && (
+	                    <img
+	                      src={previewLarge}
+	                      alt={form.name || "product"}
+	                      width={260}
+	                      height={160}
+	                      loading="lazy"
+	                      decoding="async"
+	                      style={{ width: "100%", maxWidth: 260, height: 160, objectFit: "cover", borderRadius: 12, border: "1px solid rgba(255,255,255,0.12)" }}
+	                    />
+	                  )}
 	                <input
                     type="file"
                     accept="image/*"
@@ -226,13 +229,17 @@ export default function AdminProducts() {
 	              </label>
 	              <label>
 	                {t("imageSmall")}
-                  {previewSmall && (
-                    <img
-                      src={previewSmall}
-                      alt={form.name || "product"}
-                      style={{ width: "100%", maxWidth: 220, height: 140, objectFit: "cover", borderRadius: 12, border: "1px solid rgba(255,255,255,0.12)" }}
-                    />
-                  )}
+	                  {previewSmall && (
+	                    <img
+	                      src={previewSmall}
+	                      alt={form.name || "product"}
+	                      width={220}
+	                      height={140}
+	                      loading="lazy"
+	                      decoding="async"
+	                      style={{ width: "100%", maxWidth: 220, height: 140, objectFit: "cover", borderRadius: 12, border: "1px solid rgba(255,255,255,0.12)" }}
+	                    />
+	                  )}
 	                <input
                     type="file"
                     accept="image/*"
@@ -322,6 +329,6 @@ export default function AdminProducts() {
             else setCrop(null);
           }}
         />
-	    </motion.div>
-	  );
-}
+		    </div>
+		  );
+	}

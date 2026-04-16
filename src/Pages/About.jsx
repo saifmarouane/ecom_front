@@ -1,13 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import Header from "../Components/Header";
 import Seo from "../Components/Seo";
 import { useI18n } from "../Components/I18nProvider";
-import LazyImage from "../Components/LazyImage";
-import about1 from "../images/about1.png";
-import about2 from "../images/about2.png";
-import about3 from "../images/about3.png";
+import OptimizedPicture from "../Components/OptimizedPicture";
+import Reveal from "../Components/Reveal";
+
+import about1Avif640 from "../images/optimized/about1-w640.avif";
+import about1Avif960 from "../images/optimized/about1-w960.avif";
+import about1Avif1280 from "../images/optimized/about1-w1280.avif";
+import about1Avif1600 from "../images/optimized/about1-w1600.avif";
+import about1Webp640 from "../images/optimized/about1-w640.webp";
+import about1Webp960 from "../images/optimized/about1-w960.webp";
+import about1Webp1280 from "../images/optimized/about1-w1280.webp";
+import about1Webp1600 from "../images/optimized/about1-w1600.webp";
+
+import about2Avif640 from "../images/optimized/about2-w640.avif";
+import about2Avif960 from "../images/optimized/about2-w960.avif";
+import about2Avif1280 from "../images/optimized/about2-w1280.avif";
+import about2Avif1600 from "../images/optimized/about2-w1600.avif";
+import about2Webp640 from "../images/optimized/about2-w640.webp";
+import about2Webp960 from "../images/optimized/about2-w960.webp";
+import about2Webp1280 from "../images/optimized/about2-w1280.webp";
+import about2Webp1600 from "../images/optimized/about2-w1600.webp";
+
+import about3Avif640 from "../images/optimized/about3-w640.avif";
+import about3Avif960 from "../images/optimized/about3-w960.avif";
+import about3Avif1280 from "../images/optimized/about3-w1280.avif";
+import about3Avif1600 from "../images/optimized/about3-w1600.avif";
+import about3Webp640 from "../images/optimized/about3-w640.webp";
+import about3Webp960 from "../images/optimized/about3-w960.webp";
+import about3Webp1280 from "../images/optimized/about3-w1280.webp";
+import about3Webp1600 from "../images/optimized/about3-w1600.webp";
 
 const About = () => {
   const { lang } = useI18n();
@@ -59,10 +83,7 @@ const About = () => {
 
 
       {/* Main Content */}
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}>
+      <Reveal as="section">
         <div className="about-section" style={{ padding: "40px 20px" }}>
           <div className="about-container" style={{ maxWidth: "900px", margin: "0 auto" }}>
             <h1 style={{ fontSize: "2.5em", marginBottom: "20px", color: "#8B4513", textAlign: lang === 'ar' ? 'right' : 'left' }}>
@@ -74,27 +95,25 @@ const About = () => {
             </p>
 
              {/* Image 1 */}
-             <motion.div
-               initial={{ opacity: 0 }}
-               whileInView={{ opacity: 1 }}
-               transition={{ delay: 0.2 }}
-               style={{
-                 width: "100%",
-                 height: "300px",
-                 marginBottom: "30px",
-                 borderRadius: "10px",
-                 overflow: "hidden"
-               }}>
-<LazyImage 
-                  src={about1} 
+		             <Reveal as="div" style={{
+	                 width: "100%",
+	                 height: "300px",
+	                 marginBottom: "30px",
+	                 borderRadius: "10px",
+	                 overflow: "hidden"
+	               }}>
+                <OptimizedPicture
                   alt="About 1"
-                  style={{ 
-                    width: "100%", 
-                    height: "100%", 
-                    objectFit: "cover" 
-                  }}
+                  width={2752}
+                  height={1536}
+                  sizes="(max-width: 980px) 92vw, 900px"
+                  srcSetAvif={`${about1Avif640} 640w, ${about1Avif960} 960w, ${about1Avif1280} 1280w, ${about1Avif1600} 1600w`}
+                  srcSetWebp={`${about1Webp640} 640w, ${about1Webp960} 960w, ${about1Webp1280} 1280w, ${about1Webp1600} 1600w`}
+                  src={about1Webp960}
+                  style={{ display: "block", width: "100%", height: "100%" }}
+                  imgStyle={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
-             </motion.div>
+	             </Reveal>
 
             <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#8b5e3c", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph1}
@@ -105,27 +124,25 @@ const About = () => {
             </p>
 
              {/* Image 2 */}
-             <motion.div
-               initial={{ opacity: 0 }}
-               whileInView={{ opacity: 1 }}
-               transition={{ delay: 0.4 }}
-               style={{
-                 width: "100%",
-                 height: "300px",
-                 marginBottom: "30px",
-                 borderRadius: "10px",
-                 overflow: "hidden"
-               }}>
-<img 
-                  src={about2} 
+	            <Reveal as="div" style={{
+	                 width: "100%",
+	                 height: "300px",
+	                 marginBottom: "30px",
+	                 borderRadius: "10px",
+	                 overflow: "hidden"
+	               }}>
+                <OptimizedPicture
                   alt="About 2"
-                  style={{ 
-                    width: "100%", 
-                    height: "100%", 
-                    objectFit: "cover" 
-                  }}
+                  width={2752}
+                  height={1536}
+                  sizes="(max-width: 980px) 92vw, 900px"
+                  srcSetAvif={`${about2Avif640} 640w, ${about2Avif960} 960w, ${about2Avif1280} 1280w, ${about2Avif1600} 1600w`}
+                  srcSetWebp={`${about2Webp640} 640w, ${about2Webp960} 960w, ${about2Webp1280} 1280w, ${about2Webp1600} 1600w`}
+                  src={about2Webp960}
+                  style={{ display: "block", width: "100%", height: "100%" }}
+                  imgStyle={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
-             </motion.div>
+	             </Reveal>
 
             <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "20px", color: "#8b5e3c", whiteSpace: "pre-line", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph3}
@@ -136,27 +153,25 @@ const About = () => {
             </p>
 
              {/* Image 3 */}
-             <motion.div
-               initial={{ opacity: 0 }}
-               whileInView={{ opacity: 1 }}
-               transition={{ delay: 0.6 }}
-               style={{
-                 width: "100%",
-                 height: "300px",
-                 marginBottom: "30px",
-                 borderRadius: "10px",
-                 overflow: "hidden"
-               }}>
-<img 
-                  src={about3} 
+	             <Reveal as="div" style={{
+	                 width: "100%",
+	                 height: "300px",
+	                 marginBottom: "30px",
+	                 borderRadius: "10px",
+	                 overflow: "hidden"
+	               }}>
+                <OptimizedPicture
                   alt="About 3"
-                  style={{ 
-                    width: "100%", 
-                    height: "100%", 
-                    objectFit: "cover" 
-                  }}
+                  width={2752}
+                  height={1536}
+                  sizes="(max-width: 980px) 92vw, 900px"
+                  srcSetAvif={`${about3Avif640} 640w, ${about3Avif960} 960w, ${about3Avif1280} 1280w, ${about3Avif1600} 1600w`}
+                  srcSetWebp={`${about3Webp640} 640w, ${about3Webp960} 960w, ${about3Webp1280} 1280w, ${about3Webp1600} 1600w`}
+                  src={about3Webp960}
+                  style={{ display: "block", width: "100%", height: "100%" }}
+                  imgStyle={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
-             </motion.div>
+	             </Reveal>
 
             <p className="about-text" style={{ fontSize: "1.1em", lineHeight: "1.8", marginBottom: "30px", color: "#8b5e3c", textAlign: lang === 'ar' ? 'right' : 'left' }}>
               {currentContent.paragraph5}
@@ -180,7 +195,7 @@ const About = () => {
             </Link>
           </div>
         </div>
-      </motion.section>
+      </Reveal>
     </div>
   );
 };

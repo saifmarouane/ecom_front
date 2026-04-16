@@ -1,41 +1,36 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useI18n } from './I18nProvider';
 import './TestimonialsSection.css';
 
 const TestimonialsSection = () => {
   const { t } = useI18n();
   const scrollContainerRef = useRef(null);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
 
-  const testimonials = [
-    {
-      name: 'Ahmed B.',
-      review: t('testimonial1'),
-      rating: 5,
-      image: 'https://via.placeholder.com/60x60?text=A'
-    },
-    {
-      name: 'Fatima K.',
-      review: t('testimonial2'),
-      rating: 4.5,
-      image: 'https://via.placeholder.com/60x60?text=F'
-    },
-    {
-      name: 'Mohamed R.',
-      review: t('testimonial3'),
-      rating: 5,
-      image: 'https://via.placeholder.com/60x60?text=M'
-    },
-    {
-      name: 'Amina S.',
-      review: t('testimonial4'),
-      rating: 5,
-      image: 'https://via.placeholder.com/60x60?text=A'
-    },
-  ];
+  const avatarDataUri = (initial) => {
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f6c344"/>
+            <stop offset="1" stop-color="#ec7f34"/>
+          </linearGradient>
+        </defs>
+        <rect width="120" height="120" rx="60" fill="url(#g)"/>
+        <text x="60" y="72" text-anchor="middle" font-family="Inter, system-ui, -apple-system, Segoe UI" font-size="56" font-weight="700" fill="#1b120c">${String(initial || '?').slice(0, 1)}</text>
+      </svg>
+    `.trim();
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  };
 
-  // Duplicate for seamless scrolling
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  const testimonials = useMemo(
+    () => [
+      { name: "Ahmed B.", review: t("testimonial1"), rating: 5, image: avatarDataUri("A") },
+      { name: "Fatima K.", review: t("testimonial2"), rating: 4.5, image: avatarDataUri("F") },
+      { name: "Mohamed R.", review: t("testimonial3"), rating: 5, image: avatarDataUri("M") },
+      { name: "Amina S.", review: t("testimonial4"), rating: 5, image: avatarDataUri("A") },
+    ],
+    [t]
+  );
 
   const renderStars = (rating) => {
     const stars = [];
@@ -55,45 +50,24 @@ const TestimonialsSection = () => {
     return stars;
   };
 
-  // Auto scroll functionality - smoother scrolling
-  useEffect(() => {
-    let intervalId;
-    if (isAutoScrolling && scrollContainerRef.current) {
-      intervalId = setInterval(() => {
-        // Smooth scroll by 1px for better visual effect
-        scrollContainerRef.current.scrollLeft += 1;
-        // Reset scroll position when it reaches the end of first set
-        if (scrollContainerRef.current.scrollLeft >= 
-            scrollContainerRef.current.scrollWidth / 2) {
-          scrollContainerRef.current.scrollLeft = 0;
-        }
-      }, 16); // ~60fps for smoother animation
-    }
-    return () => clearInterval(intervalId);
-  }, [isAutoScrolling]);
+  // Manual scroll functions - scroll by exact card width with fallback
+	   const scrollLeft = () => {
+	     if (scrollContainerRef.current) {
+	       // Use fixed values that match CSS to avoid timing issues
+	       const cardWidth = 280; // Matches CSS width
+	       const gap = 32; // 2rem = 32px
+	       scrollContainerRef.current.scrollBy({ left: -(cardWidth + gap), behavior: 'smooth' });
+	     }
+	   };
 
-// Manual scroll functions - scroll by exact card width with fallback
-   const scrollLeft = () => {
-     if (scrollContainerRef.current) {
-       // Use fixed values that match CSS to avoid timing issues
-       const cardWidth = 280; // Matches CSS width
-       const gap = 32; // 2rem = 32px
-       scrollContainerRef.current.scrollLeft -= (cardWidth + gap);
-     }
-   };
-
-   const scrollRight = () => {
-     if (scrollContainerRef.current) {
-       // Use fixed values that match CSS to avoid timing issues
-       const cardWidth = 280; // Matches CSS width
-       const gap = 32; // 2rem = 32px
-       scrollContainerRef.current.scrollLeft += (cardWidth + gap);
-     }
-   };
-
-  // Pause auto-scroll on hover
-  const handleMouseEnter = () => setIsAutoScrolling(false);
-  const handleMouseLeave = () => setIsAutoScrolling(true);
+	   const scrollRight = () => {
+	     if (scrollContainerRef.current) {
+	       // Use fixed values that match CSS to avoid timing issues
+	       const cardWidth = 280; // Matches CSS width
+	       const gap = 32; // 2rem = 32px
+	       scrollContainerRef.current.scrollBy({ left: (cardWidth + gap), behavior: 'smooth' });
+	     }
+	   };
 
   return (
     <section className="testimonials">
@@ -108,20 +82,22 @@ const TestimonialsSection = () => {
           &#9664;
         </button>
         
-        <div 
-          className="testimonials-scroll" 
-          ref={scrollContainerRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          {duplicatedTestimonials.map((testimonial, index) => (
-            <div key={index} className="testimonial-card">
-              <img 
-                src={testimonial.image} 
-                alt={testimonial.name} 
-                className="testimonial-image"
-              />
-              <div className="testimonial-content">
+	        <div 
+	          className="testimonials-scroll" 
+	          ref={scrollContainerRef}
+	        >
+	          {testimonials.map((testimonial, index) => (
+	            <div key={index} className="testimonial-card">
+	              <img 
+	                src={testimonial.image} 
+	                alt={testimonial.name} 
+	                width={90}
+	                height={90}
+	                loading="lazy"
+	                decoding="async"
+	                className="testimonial-image"
+	              />
+	              <div className="testimonial-content">
                 <div className="testimonial-rating">
                   {renderStars(testimonial.rating)}
                 </div>
