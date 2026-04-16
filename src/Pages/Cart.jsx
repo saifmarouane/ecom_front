@@ -82,7 +82,7 @@ export default function Cart() {
                         />
                         <button type="button" className="qty-btn" onClick={() => cart.setQty(it, Number(it.quantity) + 1)}>+</button>
                       </div>
-                      <div className="cart-price">{Number(p.price || 0).toFixed(2)} €</div>
+                      <div className="cart-price">{Number(p.price || 0).toFixed(2)} DH</div>
                       <div className="cart-remove">
                         <button type="button" className="btn ghost danger" onClick={() => cart.remove(it)}>{t("remove")}</button>
                       </div>
@@ -99,7 +99,7 @@ export default function Cart() {
 	                </div>
 	                <div className="sum-row total">
 	                  <span>{t("total")}</span>
-	                  <span>{total.toFixed(2)} €</span>
+	                  <span>{total.toFixed(2)} DH</span>
 	                </div>
 	                {!user ? (
 	                  <Link className="btn solid" to="/login">{t("loginToCheckout")}</Link>

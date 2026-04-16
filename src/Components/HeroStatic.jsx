@@ -64,7 +64,7 @@ export default function HeroStatic() {
             <h3>{t("heroCardTitle")}</h3>
             <p>{t("heroCardDesc")}</p>
             <div className="price-row">
-              <span className="price">€18.00</span>
+              <span className="price">DH18.00</span>
               <span className="badge">{t("priceInStock")}</span>
             </div>
             <Link className="btn full" to="/products">

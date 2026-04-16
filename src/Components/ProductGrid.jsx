@@ -38,11 +38,11 @@ export default function ProductGrid({ products }) {
               <div className="product-footer">
                 <div className="price-stack">
                   <span className="product-price">
-                    {Number(product.price || 0).toFixed(2)} €
+                    {Number(product.price || 0).toFixed(2)} DH
                   </span>
                   {product.originalPrice && (
                     <span className="product-original">
-                      {Number(product.originalPrice).toFixed(2)} €
+                      {Number(product.originalPrice).toFixed(2)} DH
                     </span>
                   )}
                 </div>

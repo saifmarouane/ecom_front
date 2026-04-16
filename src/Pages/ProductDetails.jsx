@@ -75,8 +75,8 @@ export default function ProductDetails() {
                 <p className="lede">{product.description || t("noDescription")}</p>
 
                 <div className="pd-price">
-                  <span className="pd-price-main">{price.toFixed(2)} €</span>
-                  {original && <span className="pd-price-old">{original.toFixed(2)} €</span>}
+                  <span className="pd-price-main">{price.toFixed(2)} DH</span>
+                  {original && <span className="pd-price-old">{original.toFixed(2)} DH</span>}
                   <span className={`pd-stock ${product.stock > 0 ? "ok" : "no"}`}>
                     {product.stock > 0 ? t("inStock") : t("outOfStock")}
                   </span>

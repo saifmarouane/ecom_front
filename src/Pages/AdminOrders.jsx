@@ -237,7 +237,7 @@ export default function AdminOrders() {
                       <div>{email}</div>
                       <div>{created}</div>
                       <div>{count}</div>
-                      <div>{Number(total || 0).toFixed(2)} €</div>
+                      <div>{Number(total || 0).toFixed(2)} DH</div>
                       <div style={isEditing ? { border: "1px solid #b2f0b2", borderRadius: 4, padding: "4px" } : {}}>
                         {isEditing ? (
                           <>
@@ -315,7 +315,7 @@ export default function AdminOrders() {
                               {statusOptions.find((s) => s.value === (o.status || "ordered"))?.label || (o.status || "-")}
                             </div>
                             <div>
-                              <strong>{t("total")}:</strong> {Number(total || 0).toFixed(2)} €
+                              <strong>{t("total")}:</strong> {Number(total || 0).toFixed(2)} DH
                             </div>
                             <div style={{ gridColumn: "1 / -1" }}>
                               <strong>{t("comment")}:</strong> {(commentDrafts[o.id] ?? o?.comment ?? "").toString() || "-"}
@@ -345,10 +345,10 @@ export default function AdminOrders() {
                                       <span style={{ fontFamily: "monospace" }}>{p?.id || it?.productId || "-"}</span>
                                     </div>
                                     <div className="order-item__row">
-                                      <span>{t("price")}: {Number(p?.price || 0).toFixed(2)} €</span>
-                                      <span>{t("originalPrice")}: {p?.originalPrice ? Number(p.originalPrice).toFixed(2) : "-"} €</span>
+                                      <span>{t("price")}: {Number(p?.price || 0).toFixed(2)} DH</span>
+                                      <span>{t("originalPrice")}: {p?.originalPrice ? Number(p.originalPrice).toFixed(2) : "-"} DH</span>
                                       <span>x{Number(it?.quantity || 0)}</span>
-                                      <span>{t("total")}: {Number(lineTotal || 0).toFixed(2)} €</span>
+                                      <span>{t("total")}: {Number(lineTotal || 0).toFixed(2)} DH</span>
                                     </div>
                                     <div className="order-item__row">
                                       <span>{t("stock")}: {p?.stock ?? "-"}</span>
