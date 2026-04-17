@@ -65,9 +65,9 @@ export default function ProductDetails() {
           {!loading && product && (
             <div className="pd-grid">
 	              <div className="pd-media">
-	                <div className="pd-media-card">
-		                  {imgUrl ? <LazyImage src={imgUrl} alt={product.name} width={1600} height={1200} /> : <div className="product-noimage">—</div>}
-		                </div>
+              <div className="pd-media-card">
+                {imgUrl ? <LazyImage src={imgUrl} alt={product.name} /> : <div className="product-noimage">—</div>}
+              </div>
 		              </div>
               <div className="pd-info">
                 <p className="eyebrow">{product.category?.name || t("category")}</p>
