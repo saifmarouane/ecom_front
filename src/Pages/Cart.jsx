@@ -7,6 +7,7 @@ import { useAuth } from "../Components/AuthProvider";
 import LazyImage from "../Components/LazyImage";
 import { checkoutCart, toServerUrl } from "../services/api";
 import Reveal from "../Components/Reveal";
+import "./Cart.css";
 
 export default function Cart() {
   const { t } = useI18n();
@@ -66,9 +67,9 @@ export default function Cart() {
 	                  const img = p.imageSmall || p.imageLarge;
 	                  return (
 	                    <div className="cart-row" key={it.id || it.productId}>
-	                      <div className="cart-thumb">
-	                        {img ? <LazyImage src={toServerUrl(img)} alt={p.name || "product"} width={800} height={600} /> : <div className="product-noimage">—</div>}
-	                      </div>
+                      <div className="cart-thumb">
+                        {img ? <LazyImage src={toServerUrl(img)} alt={p.name || "product"} /> : <div className="product-noimage">—</div>}
+                      </div>
                       <div className="cart-info">
                         <div className="cart-title">{p.name || "-"}</div>
                         <div className="cart-sub">{p.category?.name || ""}</div>
