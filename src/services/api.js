@@ -1,6 +1,8 @@
  //const API_BASE = process.env.REACT_APP_API_BASE || '/api'
-const API_BASE ='https://ecombackend-staging.up.railway.app/api';
+//const API_BASE ='https://ecombackend-staging.up.railway.app/api';
 let memoryToken = ''
+//const API_BASE ='http://localhost:3000/api';
+const API_BASE ='https://ecomback-end.onrender.com/api';
 
 export function setAuthToken(token) {
   memoryToken = token || ''

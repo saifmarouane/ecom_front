@@ -151,12 +151,17 @@ const Header = ({ showCategories = true }) => {
               {item.label}
             </Link>
           ))}
+
           <div className="nav-actions">
             <Link className="btn solid" to="/products" onClick={() => setIsOpen(false)}>
               {t("shopNow")}
             </Link>
-            <Link className="btn ghost cart-btn" to="/cart" onClick={() => setIsOpen(false)}>
-              {t("cart")} <span className="cart-count">{cart.count}</span>
+            <Link className="icon-action" to="/products" aria-label="Favoris" onClick={() => setIsOpen(false)}>
+              <span aria-hidden="true">♡</span>
+            </Link>
+            <Link className="icon-action cart-btn" to="/cart" aria-label={t("cart")} onClick={() => setIsOpen(false)}>
+              <span className="cart-icon nav-cart-icon" aria-hidden="true" />
+              <span className="cart-count">{cart.count} articles</span>
             </Link>
             {user?.role === "admin" ? (
               <>
@@ -176,8 +181,8 @@ const Header = ({ showCategories = true }) => {
               </>
             ) : user ? (
               <>
-                <Link className="btn ghost" to="/" onClick={() => setIsOpen(false)}>
-                  {user.username}
+                <Link className="avatar-action" to="/" aria-label={user.username} onClick={() => setIsOpen(false)}>
+                  {String(user.username || "U").charAt(0).toUpperCase()}
                 </Link>
                 <button
                   className="btn ghost logout-btn"
@@ -191,8 +196,8 @@ const Header = ({ showCategories = true }) => {
                 </button>
               </>
             ) : (
-              <Link className="btn ghost" to="/login" onClick={() => setIsOpen(false)}>
-                {t("loginBtn")}
+              <Link className="avatar-action" to="/login" aria-label={t("loginBtn")} onClick={() => setIsOpen(false)}>
+                ◎
               </Link>
             )}
             <select
@@ -212,36 +217,40 @@ const Header = ({ showCategories = true }) => {
         </nav>
       </div>
 
-      {showCategories && topCategories.length > 0 && (
-        <div className="categorybar" role="navigation" aria-label={t("categories")}>
-          <div className="categorybar-inner">
-            <Link
-              to="/products"
-              className={`categorybar-link ${location.pathname === "/products" ? "active" : ""}`}
-            >
-              {t("allCategories")}
-            </Link>
+	      {showCategories && topCategories.length > 0 && (
+	        <div className="categorybar" role="navigation" aria-label={t("categories")}>
+	          <div className="categorybar-title">{t("categories")}</div>
+	          <div className="categorybar-inner">
+	            <Link
+	              to="/products"
+	              className={`categorybar-link ${location.pathname === "/products" ? "active" : ""}`}
+	            >
+	              <span className="categorybar-thumb categorybar-thumb--fallback" aria-hidden="true">⌁</span>
+	              <span className="categorybar-label">{t("allCategories")}</span>
+	            </Link>
             {topCategories.map((cat) => (
               <Link
                 key={cat.id}
                 to={`/categories/${cat.id}`}
                 className={`categorybar-link ${isCategoryRoute && location.pathname.startsWith(`/categories/${cat.id}`) ? "active" : ""}`}
               >
-	                {cat.image ? (
-	                  <LazyImage
-	                    className="categorybar-thumb"
-	                    src={toServerUrl(cat.image)}
-	                    alt={cat.name}
-	                    width={92}
+                {cat.image ? (
+                  <LazyImage
+                    className="categorybar-thumb"
+                    src={toServerUrl(cat.image)}
+                    alt={cat.name}
+                    width={92}
 	                    height={58}
 	                  />
 	                ) : null}
-                {cat.name}
-              </Link>
+	                {!cat.image ? <span className="categorybar-thumb categorybar-thumb--fallback" aria-hidden="true">◇</span> : null}
+	                <span className="categorybar-label">{cat.name}</span>
+	              </Link>
             ))}
           </div>
         </div>
       )}
+
     </header>
   );
 };

@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "./CartProvider";
-import { useI18n } from "./I18nProvider";
 import { toServerUrl } from "../services/api";
 import LazyImage from "./LazyImage";
 
 export default function ProductGrid({ products }) {
   const cart = useCart();
-  const { t } = useI18n();
 
   const list = Array.isArray(products) ? products : [];
 
@@ -25,14 +23,12 @@ export default function ProductGrid({ products }) {
 	                  width={800}
 	                  height={600}
 	                />
-	              ) : (
-	                <div className="product-noimage">—</div>
-	              )}
-              {product.category?.name && (
-                <div className="product-pill">{product.category.name}</div>
-              )}
+		              ) : (
+		                <div className="product-noimage">—</div>
+		              )}
             </div>
             <div className="product-body">
+              <span className="product-brand">{product.category?.name || "Beldi Market"}</span>
               <h3>{product.name}</h3>
               <p className="product-description">{product.description}</p>
               <div className="product-footer">
@@ -48,14 +44,15 @@ export default function ProductGrid({ products }) {
                 </div>
                 <button
                   type="button"
-                  className="btn ghost add-btn"
+                  className="add-btn"
+                  aria-label={`Ajouter ${product.name} au panier`}
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     cart.add(product, 1);
                   }}
                 >
-                  {t("addToCart")}
+                  <span className="cart-icon" aria-hidden="true" />
                 </button>
               </div>
             </div>
